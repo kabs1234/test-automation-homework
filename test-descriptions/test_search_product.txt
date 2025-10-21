@@ -1,0 +1,5 @@
+1. Navigate to the “Products” page.
+2. Enter “dress” in the search input field.
+3. Click the “Search” button.
+4. Wait until the search results are displayed.
+5. Verify that all displayed products contain the word “dress” in their title or description.
