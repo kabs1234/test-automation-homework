@@ -9,3 +9,4 @@ pabot_results/
 *.png
 browserstack.err
 env
+/log

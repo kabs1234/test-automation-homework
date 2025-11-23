@@ -1,129 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.0 (Python 3.11.9 on win32)" generated="2025-10-21T22:48:24.602894" rpa="false" schemaversion="5">
-<suite id="s1" name="Tests" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests">
-<suite id="s1-s1" name="Test Contact Us" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_contact_us.robot">
+<robot generator="Rebot 7.0 (Python 3.11.9 on win32)" generated="2025-11-23T14:27:18.682879" rpa="false" schemaversion="5">
+<suite id="s1" name="Suites">
+<suite id="s1-s1" name="Test Contact Us Windows, 10, Chrome, latest" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_contact_us.robot">
 <test id="s1-s1-t1" name="Contact Us Test" line="7">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:24.797782" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:24:26.863027" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:24:27.281917" level="INFO">Completed setup!</msg>
 <arg>https://automationexercise.com/</arg>
 <arg>chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-10-21T22:48:24.797782" elapsed="6.273600"/>
+<status status="PASS" start="2025-11-23T14:24:26.862028" elapsed="7.756846"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-10-21T22:48:31.071382" elapsed="0.032466"/>
+<status status="PASS" start="2025-11-23T14:24:34.619874" elapsed="1.872980"/>
+</kw>
+<kw name="Handle Cookie Consent" owner="keywords">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:24:37.493135" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:24:36.492854" elapsed="1.000281"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:24:37.495133" elapsed="0.475975"/>
+</kw>
+<msg time="2025-11-23T14:24:37.972120" level="INFO">${consent_present} = True</msg>
+<var>${consent_present}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:24:37.495133" elapsed="0.476987"/>
+</kw>
+<if>
+<branch type="IF" condition="${consent_present}">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:37.972906" level="INFO">Clicking element 'xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]'.</msg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:24:37.972906" elapsed="0.679746"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:24:38.652652" level="INFO">Cookie consent accepted</msg>
+<arg>Cookie consent accepted</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:24:38.652652" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:24:39.153150" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:24:38.652652" elapsed="0.500498"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:24:37.972906" elapsed="1.181244"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:37.972906" elapsed="1.182243"/>
+</if>
+<status status="PASS" start="2025-11-23T14:24:37.494134" elapsed="1.661015"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No cookie consent dialog present</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:39.156151" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:24:39.156151" elapsed="0.001000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:37.494134" elapsed="1.664017"/>
+</try>
+<try>
+<branch type="TRY">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:39.159150" level="INFO">Executing JavaScript:
+var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');if(overlay) overlay.remove();
+Without any arguments.</msg>
+<arg>var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');</arg>
+<arg>if(overlay) overlay.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-11-23T14:24:39.158151" elapsed="1.408126"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:24:39.158151" elapsed="1.409126"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No overlay to remove</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:40.568278" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:24:40.568278" elapsed="0.001000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:39.158151" elapsed="1.412126"/>
+</try>
+<doc>Handles cookie consent dialog if present</doc>
+<status status="PASS" start="2025-11-23T14:24:36.492854" elapsed="4.077423"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:31.104847" level="INFO">Clicking element 'xpath=//a[text()=' Contact us']'.</msg>
+<msg time="2025-11-23T14:24:40.571279" level="INFO">Clicking element 'xpath=//a[text()=' Contact us']'.</msg>
 <arg>xpath=//a[text()=' Contact us']</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:48:31.104847" elapsed="3.580830"/>
+<status status="PASS" start="2025-11-23T14:24:40.570277" elapsed="6.288886"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>xpath=//input[@data-qa='name']</arg>
 <arg>1s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-10-21T22:48:34.685677" elapsed="0.015001"/>
+<status status="PASS" start="2025-11-23T14:24:46.859163" elapsed="0.663681"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:34.700678" level="INFO">Typing text 'Aikhan' into text field 'xpath=//input[@data-qa='name']'.</msg>
+<msg time="2025-11-23T14:24:47.522844" level="INFO">Typing text 'Aikhan' into text field 'xpath=//input[@data-qa='name']'.</msg>
 <arg>xpath=//input[@data-qa='name']</arg>
 <arg>Aikhan</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:48:34.700678" elapsed="0.048076"/>
+<status status="PASS" start="2025-11-23T14:24:47.522844" elapsed="1.022391"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:34.757817" level="INFO">Typing text 'aikhan_test@example.com' into text field 'xpath=//input[@data-qa='email']'.</msg>
+<msg time="2025-11-23T14:24:48.551817" level="INFO">Typing text 'aikhan_test@example.com' into text field 'xpath=//input[@data-qa='email']'.</msg>
 <arg>xpath=//input[@data-qa='email']</arg>
 <arg>aikhan_test@example.com</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:48:34.748754" elapsed="0.066275"/>
+<status status="PASS" start="2025-11-23T14:24:48.551297" elapsed="0.630736"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:34.815665" level="INFO">Typing text 'Test Subject' into text field 'xpath=//input[@data-qa='subject']'.</msg>
+<msg time="2025-11-23T14:24:49.186630" level="INFO">Typing text 'Test Subject' into text field 'xpath=//input[@data-qa='subject']'.</msg>
 <arg>xpath=//input[@data-qa='subject']</arg>
 <arg>Test Subject</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:48:34.815368" elapsed="0.050500"/>
+<status status="PASS" start="2025-11-23T14:24:49.186630" elapsed="0.546282"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:34.866629" level="INFO">Typing text 'This is a test message.' into text field 'xpath=//textarea[@data-qa='message']'.</msg>
+<msg time="2025-11-23T14:24:49.732912" level="INFO">Typing text 'This is a test message.' into text field 'xpath=//textarea[@data-qa='message']'.</msg>
 <arg>xpath=//textarea[@data-qa='message']</arg>
 <arg>This is a test message.</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:48:34.866401" elapsed="0.053190"/>
+<status status="PASS" start="2025-11-23T14:24:49.732912" elapsed="0.539104"/>
 </kw>
 <kw name="Remove Blocking Ads" owner="keywords">
 <kw name="Get WebElements" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:34.933215" level="INFO">${ads} = [&lt;selenium.webdriver.remote.webelement.WebElement (session="98ce10120fff67e34f1f09ca79dd4da5", element="f.37DE6CABBD5B972C8450CFD2AD69F9E8.d.EE736AA7C0373A01785D81C39B5D558A.e.81")&gt;, &lt;selenium.webdriv...</msg>
+<msg time="2025-11-23T14:24:50.441180" level="INFO">${ads} = [&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.424")&gt;, &lt;seleniu...</msg>
 <var>${ads}</var>
 <arg>//div[starts-with(@id, "aswift") or contains(@id, "google_ads") or contains(@id, "ad-container")]</arg>
 <doc>Returns a list of WebElement objects matching the ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:48:34.919591" elapsed="0.013624"/>
+<status status="PASS" start="2025-11-23T14:24:50.282390" elapsed="0.159820"/>
 </kw>
 <for flavor="IN">
 <iter>
 <kw name="Run Keyword And Return Status" owner="BuiltIn">
 <kw name="Element Should Be Visible" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:34.937413" level="INFO">Element '&lt;selenium.webdriver.remote.webelement.WebElement (session="98ce10120fff67e34f1f09ca79dd4da5", element="f.37DE6CABBD5B972C8450CFD2AD69F9E8.d.EE736AA7C0373A01785D81C39B5D558A.e.81")&gt;' is displayed.</msg>
+<msg time="2025-11-23T14:24:53.322765" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20251123_142420-0-selenium-screenshot-1.png"&gt;&lt;img src="20251123_142420-0-selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-11-23T14:24:53.322765" level="FAIL">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.424")&gt;' should be visible, but it is not.</msg>
 <arg>${ad}</arg>
 <doc>Verifies that the element identified by ``locator`` is visible.</doc>
-<status status="PASS" start="2025-10-21T22:48:34.933215" elapsed="0.004198"/>
+<status status="FAIL" start="2025-11-23T14:24:50.442977" elapsed="2.888818">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.424")&gt;' should be visible, but it is not.</status>
 </kw>
-<msg time="2025-10-21T22:48:34.938415" level="INFO">${is_visible} = True</msg>
+<msg time="2025-11-23T14:24:53.331795" level="INFO">${is_visible} = False</msg>
 <var>${is_visible}</var>
 <arg>Element Should Be Visible</arg>
 <arg>${ad}</arg>
 <doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
-<status status="PASS" start="2025-10-21T22:48:34.933215" elapsed="0.005200"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_visible}">
-<kw name="Get Element Attribute" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:34.940433" level="INFO">${ad_id} = aswift_1_host</msg>
-<var>${ad_id}</var>
-<arg>${ad}</arg>
-<arg>id</arg>
-<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:48:34.938415" elapsed="0.002018"/>
-</kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2025-10-21T22:48:34.942869" level="INFO">Removing blocking ad with id: aswift_1_host</msg>
-<arg>Removing blocking ad with id: ${ad_id}</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-10-21T22:48:34.942869" elapsed="0.000000"/>
-</kw>
-<kw name="Execute Javascript" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:34.942869" level="INFO">Executing JavaScript:
-var el=document.getElementById('aswift_1_host'); if(el) el.remove();
-Without any arguments.</msg>
-<arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
-<doc>Executes the given JavaScript code with possible arguments.</doc>
-<status status="PASS" start="2025-10-21T22:48:34.942869" elapsed="0.006503"/>
-</kw>
-<status status="PASS" start="2025-10-21T22:48:34.938415" elapsed="0.010957"/>
-</branch>
-<status status="PASS" start="2025-10-21T22:48:34.938415" elapsed="0.010957"/>
-</if>
-<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="98ce10120fff67e34f1f09ca79dd4da5", element="f.37DE6CABBD5B972C8450CFD2AD69F9E8.d.EE736AA7C0373A01785D81C39B5D558A.e.81")&gt;</var>
-<status status="PASS" start="2025-10-21T22:48:34.933215" elapsed="0.016157"/>
-</iter>
-<iter>
-<kw name="Run Keyword And Return Status" owner="BuiltIn">
-<kw name="Element Should Be Visible" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:35.104059" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-10-21T22:48:35.104059" level="FAIL">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="98ce10120fff67e34f1f09ca79dd4da5", element="f.37DE6CABBD5B972C8450CFD2AD69F9E8.d.EE736AA7C0373A01785D81C39B5D558A.e.82")&gt;' should be visible, but it is not.</msg>
-<arg>${ad}</arg>
-<doc>Verifies that the element identified by ``locator`` is visible.</doc>
-<status status="FAIL" start="2025-10-21T22:48:34.950373" elapsed="0.154682">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="98ce10120fff67e34f1f09ca79dd4da5", element="f.37DE6CABBD5B972C8450CFD2AD69F9E8.d.EE736AA7C0373A01785D81C39B5D558A.e.82")&gt;' should be visible, but it is not.</status>
-</kw>
-<msg time="2025-10-21T22:48:35.105055" level="INFO">${is_visible} = False</msg>
-<var>${is_visible}</var>
-<arg>Element Should Be Visible</arg>
-<arg>${ad}</arg>
-<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
-<status status="PASS" start="2025-10-21T22:48:34.950373" elapsed="0.154682"/>
+<status status="PASS" start="2025-11-23T14:24:50.442977" elapsed="2.888818"/>
 </kw>
 <if>
 <branch type="IF" condition="${is_visible}">
@@ -132,337 +173,2453 @@ Without any arguments.</msg>
 <arg>${ad}</arg>
 <arg>id</arg>
 <doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
-<status status="NOT RUN" start="2025-10-21T22:48:35.106055" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-11-23T14:24:53.331795" elapsed="0.000000"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
 <arg>Removing blocking ad with id: ${ad_id}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2025-10-21T22:48:35.106055" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-11-23T14:24:53.331795" elapsed="0.004469"/>
 </kw>
 <kw name="Execute Javascript" owner="SeleniumLibrary">
 <arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
 <doc>Executes the given JavaScript code with possible arguments.</doc>
-<status status="NOT RUN" start="2025-10-21T22:48:35.106055" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-11-23T14:24:53.337264" elapsed="0.000075"/>
 </kw>
-<status status="NOT RUN" start="2025-10-21T22:48:35.105055" elapsed="0.001000"/>
+<status status="NOT RUN" start="2025-11-23T14:24:53.331795" elapsed="0.005544"/>
 </branch>
-<status status="PASS" start="2025-10-21T22:48:35.105055" elapsed="0.001000"/>
+<status status="PASS" start="2025-11-23T14:24:53.331795" elapsed="0.005544"/>
 </if>
-<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="98ce10120fff67e34f1f09ca79dd4da5", element="f.37DE6CABBD5B972C8450CFD2AD69F9E8.d.EE736AA7C0373A01785D81C39B5D558A.e.82")&gt;</var>
-<status status="PASS" start="2025-10-21T22:48:34.949372" elapsed="0.156683"/>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.424")&gt;</var>
+<status status="PASS" start="2025-11-23T14:24:50.442977" elapsed="2.894362"/>
 </iter>
 <iter>
 <kw name="Run Keyword And Return Status" owner="BuiltIn">
 <kw name="Element Should Be Visible" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:35.110625" level="INFO">Element '&lt;selenium.webdriver.remote.webelement.WebElement (session="98ce10120fff67e34f1f09ca79dd4da5", element="f.37DE6CABBD5B972C8450CFD2AD69F9E8.d.EE736AA7C0373A01785D81C39B5D558A.e.83")&gt;' is displayed.</msg>
+<msg time="2025-11-23T14:24:56.212745" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20251123_142420-0-selenium-screenshot-2.png"&gt;&lt;img src="20251123_142420-0-selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-11-23T14:24:56.212745" level="FAIL">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.425")&gt;' should be visible, but it is not.</msg>
 <arg>${ad}</arg>
 <doc>Verifies that the element identified by ``locator`` is visible.</doc>
-<status status="PASS" start="2025-10-21T22:48:35.106055" elapsed="0.004570"/>
+<status status="FAIL" start="2025-11-23T14:24:53.337339" elapsed="2.883955">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.425")&gt;' should be visible, but it is not.</status>
 </kw>
-<msg time="2025-10-21T22:48:35.110625" level="INFO">${is_visible} = True</msg>
+<msg time="2025-11-23T14:24:56.221820" level="INFO">${is_visible} = False</msg>
 <var>${is_visible}</var>
 <arg>Element Should Be Visible</arg>
 <arg>${ad}</arg>
 <doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
-<status status="PASS" start="2025-10-21T22:48:35.106055" elapsed="0.004570"/>
+<status status="PASS" start="2025-11-23T14:24:53.337339" elapsed="2.884481"/>
 </kw>
 <if>
 <branch type="IF" condition="${is_visible}">
 <kw name="Get Element Attribute" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:35.113624" level="INFO">${ad_id} = aswift_2_host</msg>
 <var>${ad_id}</var>
 <arg>${ad}</arg>
 <arg>id</arg>
 <doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:48:35.110625" elapsed="0.002999"/>
+<status status="NOT RUN" start="2025-11-23T14:24:56.221820" elapsed="0.000000"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-10-21T22:48:35.113624" level="INFO">Removing blocking ad with id: aswift_2_host</msg>
 <arg>Removing blocking ad with id: ${ad_id}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-10-21T22:48:35.113624" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-11-23T14:24:56.221820" elapsed="0.000000"/>
 </kw>
 <kw name="Execute Javascript" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:35.114624" level="INFO">Executing JavaScript:
+<arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:56.221820" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:24:56.221820" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:56.221820" elapsed="0.000000"/>
+</if>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.425")&gt;</var>
+<status status="PASS" start="2025-11-23T14:24:53.337339" elapsed="2.884481"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:56.373062" level="INFO">Element '&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.426")&gt;' is displayed.</msg>
+<arg>${ad}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:24:56.221820" elapsed="0.151242"/>
+</kw>
+<msg time="2025-11-23T14:24:56.373062" level="INFO">${is_visible} = True</msg>
+<var>${is_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${ad}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:24:56.221820" elapsed="0.151242"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_visible}">
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:56.520962" level="INFO">${ad_id} = aswift_2_host</msg>
+<var>${ad_id}</var>
+<arg>${ad}</arg>
+<arg>id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:24:56.373062" elapsed="0.147900"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:24:56.522815" level="INFO">Removing blocking ad with id: aswift_2_host</msg>
+<arg>Removing blocking ad with id: ${ad_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:24:56.521977" elapsed="0.000838"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:56.522815" level="INFO">Executing JavaScript:
 var el=document.getElementById('aswift_2_host'); if(el) el.remove();
 Without any arguments.</msg>
 <arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
 <doc>Executes the given JavaScript code with possible arguments.</doc>
-<status status="PASS" start="2025-10-21T22:48:35.113624" elapsed="0.007754"/>
+<status status="PASS" start="2025-11-23T14:24:56.522815" elapsed="0.149223"/>
 </kw>
-<status status="PASS" start="2025-10-21T22:48:35.110625" elapsed="0.010753"/>
+<status status="PASS" start="2025-11-23T14:24:56.373062" elapsed="0.298976"/>
 </branch>
-<status status="PASS" start="2025-10-21T22:48:35.110625" elapsed="0.010753"/>
+<status status="PASS" start="2025-11-23T14:24:56.373062" elapsed="0.298976"/>
 </if>
-<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="98ce10120fff67e34f1f09ca79dd4da5", element="f.37DE6CABBD5B972C8450CFD2AD69F9E8.d.EE736AA7C0373A01785D81C39B5D558A.e.83")&gt;</var>
-<status status="PASS" start="2025-10-21T22:48:35.106055" elapsed="0.015323"/>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.426")&gt;</var>
+<status status="PASS" start="2025-11-23T14:24:56.221820" elapsed="0.450218"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:59.116014" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20251123_142420-0-selenium-screenshot-3.png"&gt;&lt;img src="20251123_142420-0-selenium-screenshot-3.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-11-23T14:24:59.116014" level="FAIL">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.427")&gt;' should be visible, but it is not.</msg>
+<arg>${ad}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="FAIL" start="2025-11-23T14:24:56.676752" elapsed="2.439262">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.427")&gt;' should be visible, but it is not.</status>
+</kw>
+<msg time="2025-11-23T14:24:59.121030" level="INFO">${is_visible} = False</msg>
+<var>${is_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${ad}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:24:56.672038" elapsed="2.450009"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_visible}">
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<var>${ad_id}</var>
+<arg>${ad}</arg>
+<arg>id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:59.122908" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Removing blocking ad with id: ${ad_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:59.122908" elapsed="0.000000"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:59.122908" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:24:59.122908" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:59.122908" elapsed="0.003532"/>
+</if>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.427")&gt;</var>
+<status status="PASS" start="2025-11-23T14:24:56.672038" elapsed="2.454402"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:01.572013" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20251123_142420-0-selenium-screenshot-4.png"&gt;&lt;img src="20251123_142420-0-selenium-screenshot-4.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-11-23T14:25:01.572013" level="FAIL">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.428")&gt;' should be visible, but it is not.</msg>
+<arg>${ad}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="FAIL" start="2025-11-23T14:24:59.126440" elapsed="2.446444">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.428")&gt;' should be visible, but it is not.</status>
+</kw>
+<msg time="2025-11-23T14:25:01.572884" level="INFO">${is_visible} = False</msg>
+<var>${is_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${ad}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:24:59.126440" elapsed="2.446444"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_visible}">
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<var>${ad_id}</var>
+<arg>${ad}</arg>
+<arg>id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:01.572884" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Removing blocking ad with id: ${ad_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:01.572884" elapsed="0.000000"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:01.572884" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:01.572884" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:01.572884" elapsed="0.000000"/>
+</if>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="647d9fe21ac6f948cbeda1c1d8fd81d43f756960", element="f.49438742AF2ED36CD7CF5074A9D07FB0.d.ACB132143AFA03BFD06287764AC5115D.e.428")&gt;</var>
+<status status="PASS" start="2025-11-23T14:24:59.126440" elapsed="2.446444"/>
 </iter>
 <var>${ad}</var>
 <value>@{ads}</value>
-<status status="PASS" start="2025-10-21T22:48:34.933215" elapsed="0.188163"/>
+<status status="PASS" start="2025-11-23T14:24:50.442977" elapsed="11.129907"/>
 </for>
-<status status="PASS" start="2025-10-21T22:48:34.919591" elapsed="0.201787"/>
+<status status="PASS" start="2025-11-23T14:24:50.281378" elapsed="11.291506"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:35.122375" level="INFO">Clicking button 'xpath=//input[@data-qa='submit-button']'.</msg>
+<msg time="2025-11-23T14:25:01.572884" level="INFO">Clicking button 'xpath=//input[@data-qa='submit-button']'.</msg>
 <arg>xpath=//input[@data-qa='submit-button']</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:48:35.122375" elapsed="0.054864"/>
+<status status="PASS" start="2025-11-23T14:25:01.572884" elapsed="0.620080"/>
 </kw>
 <kw name="Handle Any Alert" owner="keywords">
 <try>
 <branch type="TRY">
 <kw name="Handle Alert" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:35.178236" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
+<msg time="2025-11-23T14:25:02.201499" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
 <doc>Handles the current alert and returns its message.</doc>
-<status status="PASS" start="2025-10-21T22:48:35.178236" elapsed="0.003000"/>
+<status status="PASS" start="2025-11-23T14:25:02.192964" elapsed="0.380292"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-10-21T22:48:35.182239" level="INFO">Alert handled successfully.</msg>
+<msg time="2025-11-23T14:25:02.575398" level="INFO">Alert handled successfully.</msg>
 <arg>Alert handled successfully.</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-10-21T22:48:35.181236" elapsed="0.001003"/>
+<status status="PASS" start="2025-11-23T14:25:02.574256" elapsed="0.001142"/>
 </kw>
-<status status="PASS" start="2025-10-21T22:48:35.178236" elapsed="0.004003"/>
+<status status="PASS" start="2025-11-23T14:25:02.192964" elapsed="0.382949"/>
 </branch>
 <branch type="EXCEPT">
 <kw name="Log" owner="BuiltIn">
 <arg>No alert present, continuing test.</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2025-10-21T22:48:35.182239" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-11-23T14:25:02.575913" elapsed="0.000000"/>
 </kw>
-<status status="NOT RUN" start="2025-10-21T22:48:35.182239" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-11-23T14:25:02.575913" elapsed="0.000000"/>
 </branch>
-<status status="PASS" start="2025-10-21T22:48:35.178236" elapsed="0.004003"/>
+<status status="PASS" start="2025-11-23T14:25:02.192964" elapsed="0.382949"/>
 </try>
 <doc>Accepts alert if present, otherwise continues.</doc>
-<status status="PASS" start="2025-10-21T22:48:35.178236" elapsed="0.004003"/>
+<status status="PASS" start="2025-11-23T14:25:02.192964" elapsed="0.382949"/>
 </kw>
 <kw name="Wait Until Page Contains" owner="SeleniumLibrary">
 <arg>Success! Your details have been submitted successfully.</arg>
 <arg>2s</arg>
 <doc>Waits until ``text`` appears on the current page.</doc>
-<status status="PASS" start="2025-10-21T22:48:35.183178" elapsed="0.000000"/>
-</kw>
-<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:35.402484" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
-<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
-<status status="PASS" start="2025-10-21T22:48:35.183178" elapsed="0.219306"/>
+<status status="PASS" start="2025-11-23T14:25:02.575913" elapsed="0.166306"/>
 </kw>
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-10-21T22:48:35.402484" elapsed="2.150299"/>
+<status status="PASS" start="2025-11-23T14:25:02.743041" elapsed="0.000000"/>
 </kw>
 <doc>Verify that the contact form submission works correctly.</doc>
-<status status="PASS" start="2025-10-21T22:48:24.797782" elapsed="12.756014"/>
+<status status="PASS" start="2025-11-23T14:24:26.858028" elapsed="35.885013"/>
 </test>
-<status status="PASS" start="2025-10-21T22:48:24.624362" elapsed="12.930423"/>
+<status status="PASS" start="2025-11-23T14:24:26.797000" elapsed="35.885000"/>
 </suite>
-<suite id="s1-s2" name="Test Login" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_login.robot">
-<kw name="Open AutomationExercise" owner="keywords" type="SETUP">
+<suite id="s1-s2" name="Test Contact Us Windows, 10, Firefox, latest" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_contact_us.robot">
+<test id="s1-s2-t1" name="Contact Us Test" line="7">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:37.559784" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
-<arg>${URL}</arg>
+<msg time="2025-11-23T14:24:27.398661" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:24:27.848463" level="INFO">Completed setup!</msg>
+<arg>https://automationexercise.com/</arg>
 <arg>chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-10-21T22:48:37.559784" elapsed="6.226492"/>
+<status status="PASS" start="2025-11-23T14:24:27.397661" elapsed="30.044330"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-10-21T22:48:43.786276" elapsed="0.020184"/>
+<status status="PASS" start="2025-11-23T14:24:57.441991" elapsed="0.480261"/>
 </kw>
-<status status="PASS" start="2025-10-21T22:48:37.558783" elapsed="6.247677"/>
+<kw name="Handle Cookie Consent" owner="keywords">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:24:58.922658" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:24:57.922252" elapsed="1.000406"/>
 </kw>
-<test id="s1-s2-t1" name="Login Test" line="8">
-<kw name="Login As Valid User" owner="keywords">
+<try>
+<branch type="TRY">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:24:58.922658" elapsed="0.430385"/>
+</kw>
+<msg time="2025-11-23T14:24:59.353043" level="INFO">${consent_present} = True</msg>
+<var>${consent_present}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:24:58.922658" elapsed="0.430385"/>
+</kw>
+<if>
+<branch type="IF" condition="${consent_present}">
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:43.807460" level="INFO">Clicking element 'xpath=//a[text()=" Signup / Login"]'.</msg>
-<arg>${LOGIN_BTN}</arg>
+<msg time="2025-11-23T14:24:59.353043" level="INFO">Clicking element 'xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]'.</msg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:48:43.807460" elapsed="2.826443"/>
+<status status="PASS" start="2025-11-23T14:24:59.353043" elapsed="0.520822"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:24:59.875883" level="INFO">Cookie consent accepted</msg>
+<arg>Cookie consent accepted</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:24:59.873865" elapsed="0.002018"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:00.375931" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:24:59.875883" elapsed="0.500048"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:24:59.353043" elapsed="1.023889"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:59.353043" elapsed="1.023889"/>
+</if>
+<status status="PASS" start="2025-11-23T14:24:58.922658" elapsed="1.454274"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No cookie consent dialog present</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:00.376932" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:00.376932" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:58.922658" elapsed="1.454274"/>
+</try>
+<try>
+<branch type="TRY">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:00.381154" level="INFO">Executing JavaScript:
+var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');if(overlay) overlay.remove();
+Without any arguments.</msg>
+<arg>var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');</arg>
+<arg>if(overlay) overlay.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-11-23T14:25:00.376932" elapsed="0.271513"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:00.376932" elapsed="0.271513"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No overlay to remove</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:00.650465" elapsed="0.000537"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:00.650465" elapsed="0.000537"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:00.376932" elapsed="0.275088"/>
+</try>
+<doc>Handles cookie consent dialog if present</doc>
+<status status="PASS" start="2025-11-23T14:24:57.922252" elapsed="2.729768"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:00.652843" level="INFO">Clicking element 'xpath=//a[text()=' Contact us']'.</msg>
+<arg>xpath=//a[text()=' Contact us']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:00.652658" elapsed="4.639180"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//input[@data-qa='name']</arg>
+<arg>1s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:05.291838" elapsed="0.466754"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:46.634902" level="INFO">Typing text 'aikhan_test@example.com' into text field 'xpath=//input[@data-qa="login-email"]'.</msg>
+<msg time="2025-11-23T14:25:05.761118" level="INFO">Typing text 'Aikhan' into text field 'xpath=//input[@data-qa='name']'.</msg>
+<arg>xpath=//input[@data-qa='name']</arg>
+<arg>Aikhan</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:05.761118" elapsed="0.479947"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:06.242085" level="INFO">Typing text 'aikhan_test@example.com' into text field 'xpath=//input[@data-qa='email']'.</msg>
+<arg>xpath=//input[@data-qa='email']</arg>
+<arg>aikhan_test@example.com</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:06.242085" elapsed="0.470867"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:06.712952" level="INFO">Typing text 'Test Subject' into text field 'xpath=//input[@data-qa='subject']'.</msg>
+<arg>xpath=//input[@data-qa='subject']</arg>
+<arg>Test Subject</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:06.712952" elapsed="0.451038"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:07.163990" level="INFO">Typing text 'This is a test message.' into text field 'xpath=//textarea[@data-qa='message']'.</msg>
+<arg>xpath=//textarea[@data-qa='message']</arg>
+<arg>This is a test message.</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:07.163990" elapsed="0.503084"/>
+</kw>
+<kw name="Remove Blocking Ads" owner="keywords">
+<kw name="Get WebElements" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:07.836194" level="INFO">${ads} = [&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="4002639f-4633-465a-8755-64cc4d99026c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElemen...</msg>
+<var>${ads}</var>
+<arg>//div[starts-with(@id, "aswift") or contains(@id, "google_ads") or contains(@id, "ad-container")]</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:07.669102" elapsed="0.167092"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:11.424818" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20251123_142420-1-selenium-screenshot-1.png"&gt;&lt;img src="20251123_142420-1-selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-11-23T14:25:11.424818" level="FAIL">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="4002639f-4633-465a-8755-64cc4d99026c")&gt;' should be visible, but it is not.</msg>
+<arg>${ad}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="FAIL" start="2025-11-23T14:25:07.837737" elapsed="3.594116">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="4002639f-4633-465a-8755-64cc4d99026c")&gt;' should be visible, but it is not.</status>
+</kw>
+<msg time="2025-11-23T14:25:11.431853" level="INFO">${is_visible} = False</msg>
+<var>${is_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${ad}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:25:07.837737" elapsed="3.594116"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_visible}">
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<var>${ad_id}</var>
+<arg>${ad}</arg>
+<arg>id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:11.431853" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Removing blocking ad with id: ${ad_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:11.431853" elapsed="0.000000"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:11.431853" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:11.431853" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:11.431853" elapsed="0.000000"/>
+</if>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="4002639f-4633-465a-8755-64cc4d99026c")&gt;</var>
+<status status="PASS" start="2025-11-23T14:25:07.837737" elapsed="3.594116"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:14.922204" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20251123_142420-1-selenium-screenshot-2.png"&gt;&lt;img src="20251123_142420-1-selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-11-23T14:25:14.923009" level="FAIL">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="c51453c2-0995-4323-a4c2-a65278f59913")&gt;' should be visible, but it is not.</msg>
+<arg>${ad}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="FAIL" start="2025-11-23T14:25:11.438708" elapsed="3.484301">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="c51453c2-0995-4323-a4c2-a65278f59913")&gt;' should be visible, but it is not.</status>
+</kw>
+<msg time="2025-11-23T14:25:14.923009" level="INFO">${is_visible} = False</msg>
+<var>${is_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${ad}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:25:11.438708" elapsed="3.484301"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_visible}">
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<var>${ad_id}</var>
+<arg>${ad}</arg>
+<arg>id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:14.923009" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Removing blocking ad with id: ${ad_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:14.923009" elapsed="0.000000"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:14.923009" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:14.923009" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:14.923009" elapsed="0.000000"/>
+</if>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="c51453c2-0995-4323-a4c2-a65278f59913")&gt;</var>
+<status status="PASS" start="2025-11-23T14:25:11.438708" elapsed="3.484301"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:15.149546" level="INFO">Element '&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="790583af-c04e-403e-9c0d-4e8396809be7")&gt;' is displayed.</msg>
+<arg>${ad}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:14.929588" elapsed="0.220486"/>
+</kw>
+<msg time="2025-11-23T14:25:15.151093" level="INFO">${is_visible} = True</msg>
+<var>${is_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${ad}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:25:14.929588" elapsed="0.221505"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_visible}">
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:15.296672" level="INFO">${ad_id} = aswift_2_host</msg>
+<var>${ad_id}</var>
+<arg>${ad}</arg>
+<arg>id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:15.152105" elapsed="0.149083"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:25:15.302202" level="INFO">Removing blocking ad with id: aswift_2_host</msg>
+<arg>Removing blocking ad with id: ${ad_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:25:15.302202" elapsed="0.000749"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:15.302951" level="INFO">Executing JavaScript:
+var el=document.getElementById('aswift_2_host'); if(el) el.remove();
+Without any arguments.</msg>
+<arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-11-23T14:25:15.302951" elapsed="0.150561"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:15.152105" elapsed="0.301407"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:15.152105" elapsed="0.301407"/>
+</if>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="790583af-c04e-403e-9c0d-4e8396809be7")&gt;</var>
+<status status="PASS" start="2025-11-23T14:25:14.929588" elapsed="0.523924"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:18.222374" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20251123_142420-1-selenium-screenshot-3.png"&gt;&lt;img src="20251123_142420-1-selenium-screenshot-3.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-11-23T14:25:18.222374" level="FAIL">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="dfd7e0ee-8bb2-4b4c-986e-023af514287a")&gt;' should be visible, but it is not.</msg>
+<arg>${ad}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="FAIL" start="2025-11-23T14:25:15.453512" elapsed="2.768862">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="dfd7e0ee-8bb2-4b4c-986e-023af514287a")&gt;' should be visible, but it is not.</status>
+</kw>
+<msg time="2025-11-23T14:25:18.222374" level="INFO">${is_visible} = False</msg>
+<var>${is_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${ad}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:25:15.453512" elapsed="2.768862"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_visible}">
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<var>${ad_id}</var>
+<arg>${ad}</arg>
+<arg>id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:18.222374" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Removing blocking ad with id: ${ad_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:18.222374" elapsed="0.000000"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:18.222374" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:18.222374" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:18.222374" elapsed="0.008029"/>
+</if>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="dfd7e0ee-8bb2-4b4c-986e-023af514287a")&gt;</var>
+<status status="PASS" start="2025-11-23T14:25:15.453512" elapsed="2.776891"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:21.652997" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20251123_142420-1-selenium-screenshot-4.png"&gt;&lt;img src="20251123_142420-1-selenium-screenshot-4.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-11-23T14:25:21.652997" level="FAIL">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="704dcf44-b024-4c3a-a003-9f17497552ae")&gt;' should be visible, but it is not.</msg>
+<arg>${ad}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="FAIL" start="2025-11-23T14:25:18.231416" elapsed="3.421581">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="704dcf44-b024-4c3a-a003-9f17497552ae")&gt;' should be visible, but it is not.</status>
+</kw>
+<msg time="2025-11-23T14:25:21.655009" level="INFO">${is_visible} = False</msg>
+<var>${is_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${ad}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:25:18.231416" elapsed="3.423593"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_visible}">
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<var>${ad_id}</var>
+<arg>${ad}</arg>
+<arg>id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:21.656020" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Removing blocking ad with id: ${ad_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:21.656020" elapsed="0.000000"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:21.656020" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:21.656020" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:21.656020" elapsed="0.000000"/>
+</if>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="f061f814653dde947855ab62c89bff0418b06a2d", element="704dcf44-b024-4c3a-a003-9f17497552ae")&gt;</var>
+<status status="PASS" start="2025-11-23T14:25:18.231416" elapsed="3.424604"/>
+</iter>
+<var>${ad}</var>
+<value>@{ads}</value>
+<status status="PASS" start="2025-11-23T14:25:07.837213" elapsed="13.818807"/>
+</for>
+<status status="PASS" start="2025-11-23T14:25:07.669102" elapsed="13.991928"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:21.661030" level="INFO">Clicking button 'xpath=//input[@data-qa='submit-button']'.</msg>
+<arg>xpath=//input[@data-qa='submit-button']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:21.661030" elapsed="0.796200"/>
+</kw>
+<kw name="Handle Any Alert" owner="keywords">
+<try>
+<branch type="TRY">
+<kw name="Handle Alert" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:22.457230" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
+<doc>Handles the current alert and returns its message.</doc>
+<status status="PASS" start="2025-11-23T14:25:22.457230" elapsed="0.445775"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:25:22.911038" level="INFO">Alert handled successfully.</msg>
+<arg>Alert handled successfully.</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:25:22.903005" elapsed="0.008033"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:22.457230" elapsed="0.454843"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No alert present, continuing test.</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:22.912073" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:22.912073" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:22.457230" elapsed="0.454843"/>
+</try>
+<doc>Accepts alert if present, otherwise continues.</doc>
+<status status="PASS" start="2025-11-23T14:25:22.457230" elapsed="0.454843"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Success! Your details have been submitted successfully.</arg>
+<arg>2s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-11-23T14:25:22.912073" elapsed="0.170767"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-11-23T14:25:23.082840" elapsed="0.000000"/>
+</kw>
+<doc>Verify that the contact form submission works correctly.</doc>
+<status status="PASS" start="2025-11-23T14:24:27.395661" elapsed="55.687179"/>
+</test>
+<status status="PASS" start="2025-11-23T14:24:27.340892" elapsed="57.591893"/>
+</suite>
+<suite id="s1-s3" name="Test Contact Us OS X, Tahoe, Safari, 26.0" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_contact_us.robot">
+<test id="s1-s3-t1" name="Contact Us Test" line="7">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:26.829027" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:24:27.273277" level="INFO">Completed setup!</msg>
+<arg>https://automationexercise.com/</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-11-23T14:24:26.828027" elapsed="6.983026"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-11-23T14:24:33.812053" elapsed="0.151349"/>
+</kw>
+<kw name="Handle Cookie Consent" owner="keywords">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:24:34.965205" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:24:33.964409" elapsed="1.000796"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:24:34.967213" elapsed="0.428161"/>
+</kw>
+<msg time="2025-11-23T14:24:35.396376" level="INFO">${consent_present} = True</msg>
+<var>${consent_present}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:24:34.967213" elapsed="0.430162"/>
+</kw>
+<if>
+<branch type="IF" condition="${consent_present}">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:35.398374" level="INFO">Clicking element 'xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]'.</msg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:24:35.398374" elapsed="0.353743"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:24:35.754117" level="INFO">Cookie consent accepted</msg>
+<arg>Cookie consent accepted</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:24:35.753117" elapsed="0.002002"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:24:36.256190" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:24:35.755119" elapsed="0.501071"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:24:35.398374" elapsed="0.858815"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:35.398374" elapsed="0.859815"/>
+</if>
+<status status="PASS" start="2025-11-23T14:24:34.966222" elapsed="1.291967"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No cookie consent dialog present</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:36.259189" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:24:36.258189" elapsed="0.002000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:34.966222" elapsed="1.293967"/>
+</try>
+<try>
+<branch type="TRY">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:36.261188" level="INFO">Executing JavaScript:
+var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');if(overlay) overlay.remove();
+Without any arguments.</msg>
+<arg>var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');</arg>
+<arg>if(overlay) overlay.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-11-23T14:24:36.261188" elapsed="0.131674"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:24:36.260189" elapsed="0.132673"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No overlay to remove</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:36.392862" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:24:36.392862" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:36.260189" elapsed="0.132673"/>
+</try>
+<doc>Handles cookie consent dialog if present</doc>
+<status status="PASS" start="2025-11-23T14:24:33.964409" elapsed="2.428453"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:36.392862" level="INFO">Clicking element 'xpath=//a[text()=' Contact us']'.</msg>
+<arg>xpath=//a[text()=' Contact us']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:24:36.392862" elapsed="0.262101"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//input[@data-qa='name']</arg>
+<arg>1s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:24:36.654963" elapsed="0.618879"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:37.274842" level="INFO">Typing text 'Aikhan' into text field 'xpath=//input[@data-qa='name']'.</msg>
+<arg>xpath=//input[@data-qa='name']</arg>
+<arg>Aikhan</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:24:37.274842" elapsed="0.530488"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:37.806330" level="INFO">Typing text 'aikhan_test@example.com' into text field 'xpath=//input[@data-qa='email']'.</msg>
+<arg>xpath=//input[@data-qa='email']</arg>
+<arg>aikhan_test@example.com</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:24:37.805330" elapsed="0.531123"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:38.337455" level="INFO">Typing text 'Test Subject' into text field 'xpath=//input[@data-qa='subject']'.</msg>
+<arg>xpath=//input[@data-qa='subject']</arg>
+<arg>Test Subject</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:24:38.336453" elapsed="0.426425"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:38.763877" level="INFO">Typing text 'This is a test message.' into text field 'xpath=//textarea[@data-qa='message']'.</msg>
+<arg>xpath=//textarea[@data-qa='message']</arg>
+<arg>This is a test message.</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:24:38.762878" elapsed="0.530340"/>
+</kw>
+<kw name="Remove Blocking Ads" owner="keywords">
+<kw name="Get WebElements" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:39.427862" level="INFO">${ads} = [&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-41C9385D-0522-4218-99FA-13E720D682AE")&gt;, &lt;selenium.webdriver.remote.webelement.WebE...</msg>
+<var>${ads}</var>
+<arg>//div[starts-with(@id, "aswift") or contains(@id, "google_ads") or contains(@id, "ad-container")]</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:24:39.294215" elapsed="0.134647"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:42.440062" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20251123_142420-2-selenium-screenshot-1.png"&gt;&lt;img src="20251123_142420-2-selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-11-23T14:24:42.440062" level="FAIL">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-41C9385D-0522-4218-99FA-13E720D682AE")&gt;' should be visible, but it is not.</msg>
+<arg>${ad}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="FAIL" start="2025-11-23T14:24:39.429861" elapsed="3.012093">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-41C9385D-0522-4218-99FA-13E720D682AE")&gt;' should be visible, but it is not.</status>
+</kw>
+<msg time="2025-11-23T14:24:42.442945" level="INFO">${is_visible} = False</msg>
+<var>${is_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${ad}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:24:39.429861" elapsed="3.013084"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_visible}">
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<var>${ad_id}</var>
+<arg>${ad}</arg>
+<arg>id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:42.444945" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Removing blocking ad with id: ${ad_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:42.444945" elapsed="0.001002"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:42.445947" elapsed="0.001004"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:24:42.443945" elapsed="0.003006"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:42.443945" elapsed="0.004000"/>
+</if>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-41C9385D-0522-4218-99FA-13E720D682AE")&gt;</var>
+<status status="PASS" start="2025-11-23T14:24:39.429861" elapsed="3.018084"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:45.585970" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20251123_142420-2-selenium-screenshot-2.png"&gt;&lt;img src="20251123_142420-2-selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-11-23T14:24:45.585970" level="FAIL">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-74CA9E14-AF08-46AB-9BC0-D0C900535600")&gt;' should be visible, but it is not.</msg>
+<arg>${ad}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="FAIL" start="2025-11-23T14:24:42.448945" elapsed="3.137025">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-74CA9E14-AF08-46AB-9BC0-D0C900535600")&gt;' should be visible, but it is not.</status>
+</kw>
+<msg time="2025-11-23T14:24:45.591585" level="INFO">${is_visible} = False</msg>
+<var>${is_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${ad}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:24:42.448945" elapsed="3.142640"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_visible}">
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<var>${ad_id}</var>
+<arg>${ad}</arg>
+<arg>id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:45.592885" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Removing blocking ad with id: ${ad_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:45.592885" elapsed="0.000000"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:45.592885" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:24:45.592103" elapsed="0.000782"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:45.592103" elapsed="0.000782"/>
+</if>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-74CA9E14-AF08-46AB-9BC0-D0C900535600")&gt;</var>
+<status status="PASS" start="2025-11-23T14:24:42.448945" elapsed="3.143940"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:45.733031" level="INFO">Element '&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-FC58EB3B-15D3-43F2-8445-66668BAB9B00")&gt;' is displayed.</msg>
+<arg>${ad}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:24:45.592885" elapsed="0.140146"/>
+</kw>
+<msg time="2025-11-23T14:24:45.733031" level="INFO">${is_visible} = True</msg>
+<var>${is_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${ad}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:24:45.592885" elapsed="0.140146"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_visible}">
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:45.872679" level="INFO">${ad_id} = aswift_2_host</msg>
+<var>${ad_id}</var>
+<arg>${ad}</arg>
+<arg>id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:24:45.733031" elapsed="0.139648"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:24:45.872679" level="INFO">Removing blocking ad with id: aswift_2_host</msg>
+<arg>Removing blocking ad with id: ${ad_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:24:45.872679" elapsed="0.000000"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:45.872679" level="INFO">Executing JavaScript:
+var el=document.getElementById('aswift_2_host'); if(el) el.remove();
+Without any arguments.</msg>
+<arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-11-23T14:24:45.872679" elapsed="0.140364"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:24:45.733031" elapsed="0.280012"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:45.733031" elapsed="0.280012"/>
+</if>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-FC58EB3B-15D3-43F2-8445-66668BAB9B00")&gt;</var>
+<status status="PASS" start="2025-11-23T14:24:45.592885" elapsed="0.420158"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:48.743029" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20251123_142420-2-selenium-screenshot-3.png"&gt;&lt;img src="20251123_142420-2-selenium-screenshot-3.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-11-23T14:24:48.743029" level="FAIL">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-59B8536B-FDA4-41AE-94E0-8D9F824ABB14")&gt;' should be visible, but it is not.</msg>
+<arg>${ad}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="FAIL" start="2025-11-23T14:24:46.017058" elapsed="2.725971">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-59B8536B-FDA4-41AE-94E0-8D9F824ABB14")&gt;' should be visible, but it is not.</status>
+</kw>
+<msg time="2025-11-23T14:24:48.743029" level="INFO">${is_visible} = False</msg>
+<var>${is_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${ad}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:24:46.013043" elapsed="2.729986"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_visible}">
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<var>${ad_id}</var>
+<arg>${ad}</arg>
+<arg>id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:48.743029" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Removing blocking ad with id: ${ad_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:48.743029" elapsed="0.000000"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:48.743029" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:24:48.743029" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:48.743029" elapsed="0.008065"/>
+</if>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-59B8536B-FDA4-41AE-94E0-8D9F824ABB14")&gt;</var>
+<status status="PASS" start="2025-11-23T14:24:46.013043" elapsed="2.738051"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:51.642750" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20251123_142420-2-selenium-screenshot-4.png"&gt;&lt;img src="20251123_142420-2-selenium-screenshot-4.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-11-23T14:24:51.642750" level="FAIL">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-E2F9D62F-A54C-4DDD-86C7-301D247E71F4")&gt;' should be visible, but it is not.</msg>
+<arg>${ad}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="FAIL" start="2025-11-23T14:24:48.752108" elapsed="2.899160">The element '&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-E2F9D62F-A54C-4DDD-86C7-301D247E71F4")&gt;' should be visible, but it is not.</status>
+</kw>
+<msg time="2025-11-23T14:24:51.651268" level="INFO">${is_visible} = False</msg>
+<var>${is_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${ad}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:24:48.752108" elapsed="2.900174"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_visible}">
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<var>${ad_id}</var>
+<arg>${ad}</arg>
+<arg>id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:51.652282" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Removing blocking ad with id: ${ad_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:51.652282" elapsed="0.000000"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<arg>var el=document.getElementById('${ad_id}'); if(el) el.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:51.652282" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:24:51.652282" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:51.652282" elapsed="0.000000"/>
+</if>
+<var name="${ad}">&lt;selenium.webdriver.remote.webelement.WebElement (session="e44dc44b8df25f7a4a0c677c3506947ed0c1aea5", element="node-E2F9D62F-A54C-4DDD-86C7-301D247E71F4")&gt;</var>
+<status status="PASS" start="2025-11-23T14:24:48.752108" elapsed="2.900174"/>
+</iter>
+<var>${ad}</var>
+<value>@{ads}</value>
+<status status="PASS" start="2025-11-23T14:24:39.428862" elapsed="12.223420"/>
+</for>
+<status status="PASS" start="2025-11-23T14:24:39.294215" elapsed="12.358067"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:51.652282" level="INFO">Clicking button 'xpath=//input[@data-qa='submit-button']'.</msg>
+<arg>xpath=//input[@data-qa='submit-button']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:24:51.652282" elapsed="0.461630"/>
+</kw>
+<kw name="Handle Any Alert" owner="keywords">
+<try>
+<branch type="TRY">
+<kw name="Handle Alert" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:24:52.121997" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
+<doc>Handles the current alert and returns its message.</doc>
+<status status="PASS" start="2025-11-23T14:24:52.121997" elapsed="1.440831"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:24:53.562828" level="INFO">Alert handled successfully.</msg>
+<arg>Alert handled successfully.</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:24:53.562828" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:24:52.121997" elapsed="1.440831"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No alert present, continuing test.</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:24:53.562828" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:24:53.562828" elapsed="0.007256"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:24:52.121991" elapsed="1.448521"/>
+</try>
+<doc>Accepts alert if present, otherwise continues.</doc>
+<status status="PASS" start="2025-11-23T14:24:52.121465" elapsed="1.449047"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Success! Your details have been submitted successfully.</arg>
+<arg>2s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-11-23T14:24:53.570512" elapsed="0.145401"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-11-23T14:24:53.715913" elapsed="0.000000"/>
+</kw>
+<doc>Verify that the contact form submission works correctly.</doc>
+<status status="PASS" start="2025-11-23T14:24:26.826028" elapsed="26.895399"/>
+</test>
+<status status="PASS" start="2025-11-23T14:24:26.773032" elapsed="29.049755"/>
+</suite>
+<suite id="s1-s4" name="Test Login Windows, 10, Chrome, latest" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_login.robot">
+<kw name="Open AutomationExercise" owner="keywords" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:06.201941" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:25:06.586300" level="INFO">Completed setup!</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-11-23T14:25:06.201419" elapsed="8.539849"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-11-23T14:25:14.741268" elapsed="0.281518"/>
+</kw>
+<kw name="Handle Cookie Consent" owner="keywords">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:16.030233" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:15.022786" elapsed="1.007447"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:16.032784" elapsed="0.540194"/>
+</kw>
+<msg time="2025-11-23T14:25:16.572978" level="INFO">${consent_present} = True</msg>
+<var>${consent_present}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:25:16.032269" elapsed="0.540709"/>
+</kw>
+<if>
+<branch type="IF" condition="${consent_present}">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:16.572978" level="INFO">Clicking element 'xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]'.</msg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:16.572978" elapsed="0.810277"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:25:17.385062" level="INFO">Cookie consent accepted</msg>
+<arg>Cookie consent accepted</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:25:17.384060" elapsed="0.001002"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:17.886563" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:17.386058" elapsed="0.500505"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:16.572978" elapsed="1.314599"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:16.572978" elapsed="1.314599"/>
+</if>
+<status status="PASS" start="2025-11-23T14:25:16.031251" elapsed="1.856326"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No cookie consent dialog present</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:17.887577" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:17.887577" elapsed="0.003016"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:16.031251" elapsed="1.859855"/>
+</try>
+<try>
+<branch type="TRY">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:17.892123" level="INFO">Executing JavaScript:
+var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');if(overlay) overlay.remove();
+Without any arguments.</msg>
+<arg>var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');</arg>
+<arg>if(overlay) overlay.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-11-23T14:25:17.891106" elapsed="1.521803"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:17.891106" elapsed="1.526347"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No overlay to remove</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:19.417453" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:19.417453" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:17.891106" elapsed="1.526347"/>
+</try>
+<doc>Handles cookie consent dialog if present</doc>
+<status status="PASS" start="2025-11-23T14:25:15.022786" elapsed="4.394667"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:06.192226" elapsed="13.228749"/>
+</kw>
+<test id="s1-s4-t1" name="Login Test" line="8">
+<kw name="Login As Valid User" owner="keywords">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LOGIN_BTN}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:19.422887" elapsed="0.350222"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:19.773109" level="INFO">Clicking element 'xpath=//a[text()=" Signup / Login"]'.</msg>
+<arg>${LOGIN_BTN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:19.773109" elapsed="3.289776"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:26.063220" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:23.062885" elapsed="3.000335"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${EMAIL_INP}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:26.063220" elapsed="0.377727"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:26.442795" level="INFO">Typing text 'aikhan_test@example.com' into text field 'xpath=//input[@data-qa="login-email"]'.</msg>
 <arg>${EMAIL_INP}</arg>
 <arg>aikhan_test@example.com</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:48:46.633903" elapsed="0.061420"/>
+<status status="PASS" start="2025-11-23T14:25:26.441948" elapsed="0.636290"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:27.579564" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:27.079238" elapsed="0.500326"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${PASSWORD_INP}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:27.581077" elapsed="0.314061"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:46.695323" level="INFO">Typing text '12345678' into text field 'xpath=//input[@data-qa="login-password"]'.</msg>
+<msg time="2025-11-23T14:25:27.896139" level="INFO">Typing text '12345678' into text field 'xpath=//input[@data-qa="login-password"]'.</msg>
 <arg>${PASSWORD_INP}</arg>
 <arg>12345678</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:48:46.695323" elapsed="0.046530"/>
+<status status="PASS" start="2025-11-23T14:25:27.896139" elapsed="0.545857"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:28.944028" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:28.443995" elapsed="0.500033"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${SUBMIT_LOGIN}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:28.945033" elapsed="0.960579"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:46.742856" level="INFO">Clicking element 'xpath=//button[@data-qa="login-button"]'.</msg>
+<msg time="2025-11-23T14:25:29.907611" level="INFO">Clicking element 'xpath=//button[@data-qa="login-button"]'.</msg>
 <arg>${SUBMIT_LOGIN}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:48:46.741853" elapsed="0.037375"/>
+<status status="PASS" start="2025-11-23T14:25:29.907611" elapsed="4.198073"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${LOGGED_USER}</arg>
-<arg>5s</arg>
+<arg>15s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-10-21T22:48:46.779228" elapsed="3.252729"/>
+<status status="PASS" start="2025-11-23T14:25:34.106685" elapsed="0.336303"/>
 </kw>
-<status status="PASS" start="2025-10-21T22:48:43.807460" elapsed="6.224497"/>
+<status status="PASS" start="2025-11-23T14:25:19.422887" elapsed="15.020613"/>
 </kw>
 <kw name="Element Should Contain" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:50.046958" level="INFO">Element 'xpath=//a[contains(text(),"Logged in as")]' contains text 'Logged in as'.</msg>
+<msg time="2025-11-23T14:25:34.745569" level="INFO">Element 'xpath=//a[contains(text(),"Logged in as")]' contains text 'Logged in as'.</msg>
 <arg>${LOGGED_USER}</arg>
 <arg>Logged in as</arg>
 <doc>Verifies that element ``locator`` contains text ``expected``.</doc>
-<status status="PASS" start="2025-10-21T22:48:50.031957" elapsed="0.015001"/>
+<status status="PASS" start="2025-11-23T14:25:34.443500" elapsed="0.302069"/>
 </kw>
 <doc>Verify that a user can log in successfully</doc>
-<status status="PASS" start="2025-10-21T22:48:43.806460" elapsed="6.240498"/>
+<status status="PASS" start="2025-11-23T14:25:19.420975" elapsed="15.325594"/>
 </test>
 <kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-10-21T22:48:50.047958" elapsed="2.177279"/>
+<status status="PASS" start="2025-11-23T14:25:35.772133" elapsed="0.001000"/>
 </kw>
-<status status="PASS" start="2025-10-21T22:48:37.554785" elapsed="14.670452"/>
+<status status="PASS" start="2025-11-23T14:25:06.159446" elapsed="29.614687"/>
 </suite>
-<suite id="s1-s3" name="Test Logout" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_logout.robot">
+<suite id="s1-s5" name="Test Login Windows, 10, Firefox, latest" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_login.robot">
 <kw name="Open AutomationExercise" owner="keywords" type="SETUP">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:52.225237" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:25:15.884652" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:25:16.256211" level="INFO">Completed setup!</msg>
 <arg>${URL}</arg>
 <arg>chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-10-21T22:48:52.225237" elapsed="5.849897"/>
+<status status="PASS" start="2025-11-23T14:25:15.884652" elapsed="16.405327"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-10-21T22:48:58.075134" elapsed="0.023264"/>
+<status status="PASS" start="2025-11-23T14:25:32.290978" elapsed="0.461474"/>
 </kw>
-<status status="PASS" start="2025-10-21T22:48:52.225237" elapsed="5.873161"/>
+<kw name="Handle Cookie Consent" owner="keywords">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:33.754889" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:32.754450" elapsed="1.000439"/>
 </kw>
-<test id="s1-s3-t1" name="Logout Test" line="8">
-<kw name="Login As Valid User" owner="keywords">
+<try>
+<branch type="TRY">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:33.756888" elapsed="0.437017"/>
+</kw>
+<msg time="2025-11-23T14:25:34.194904" level="INFO">${consent_present} = True</msg>
+<var>${consent_present}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:25:33.756888" elapsed="0.439016"/>
+</kw>
+<if>
+<branch type="IF" condition="${consent_present}">
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:48:58.099398" level="INFO">Clicking element 'xpath=//a[text()=" Signup / Login"]'.</msg>
+<msg time="2025-11-23T14:25:34.196908" level="INFO">Clicking element 'xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]'.</msg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:34.196908" elapsed="0.446781"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:25:34.644688" level="INFO">Cookie consent accepted</msg>
+<arg>Cookie consent accepted</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:25:34.644688" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:35.146387" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:34.645689" elapsed="0.500698"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:34.196908" elapsed="0.950479"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:34.196908" elapsed="0.951479"/>
+</if>
+<status status="PASS" start="2025-11-23T14:25:33.755889" elapsed="1.392498"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No cookie consent dialog present</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:35.149389" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:35.149389" elapsed="0.000999"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:33.755889" elapsed="1.395499"/>
+</try>
+<try>
+<branch type="TRY">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:35.152387" level="INFO">Executing JavaScript:
+var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');if(overlay) overlay.remove();
+Without any arguments.</msg>
+<arg>var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');</arg>
+<arg>if(overlay) overlay.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-11-23T14:25:35.151388" elapsed="0.198016"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:35.151388" elapsed="0.199015"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No overlay to remove</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:35.351403" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:35.350403" elapsed="0.001000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:35.151388" elapsed="0.201016"/>
+</try>
+<doc>Handles cookie consent dialog if present</doc>
+<status status="PASS" start="2025-11-23T14:25:32.753451" elapsed="2.598953"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:15.884652" elapsed="19.468751"/>
+</kw>
+<test id="s1-s5-t1" name="Login Test" line="8">
+<kw name="Login As Valid User" owner="keywords">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LOGIN_BTN}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:35.355404" elapsed="0.458729"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:35.815133" level="INFO">Clicking element 'xpath=//a[text()=" Signup / Login"]'.</msg>
 <arg>${LOGIN_BTN}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:48:58.099398" elapsed="3.958003"/>
+<status status="PASS" start="2025-11-23T14:25:35.815133" elapsed="2.222877"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:41.039180" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:38.039010" elapsed="3.000170"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${EMAIL_INP}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:41.040180" elapsed="0.289986"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:49:02.058399" level="INFO">Typing text 'aikhan_test@example.com' into text field 'xpath=//input[@data-qa="login-email"]'.</msg>
+<msg time="2025-11-23T14:25:41.331166" level="INFO">Typing text 'aikhan_test@example.com' into text field 'xpath=//input[@data-qa="login-email"]'.</msg>
 <arg>${EMAIL_INP}</arg>
 <arg>aikhan_test@example.com</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:49:02.058399" elapsed="0.061551"/>
+<status status="PASS" start="2025-11-23T14:25:41.331166" elapsed="0.482059"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:42.314426" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:41.814225" elapsed="0.500201"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${PASSWORD_INP}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:42.315426" elapsed="0.315230"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:49:02.121005" level="INFO">Typing text '12345678' into text field 'xpath=//input[@data-qa="login-password"]'.</msg>
+<msg time="2025-11-23T14:25:42.632235" level="INFO">Typing text '12345678' into text field 'xpath=//input[@data-qa="login-password"]'.</msg>
 <arg>${PASSWORD_INP}</arg>
 <arg>12345678</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:49:02.121005" elapsed="0.036662"/>
+<status status="PASS" start="2025-11-23T14:25:42.632235" elapsed="0.440535"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:43.573269" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:43.072770" elapsed="0.501115"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${SUBMIT_LOGIN}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:43.574397" elapsed="0.286704"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:49:02.157667" level="INFO">Clicking element 'xpath=//button[@data-qa="login-button"]'.</msg>
+<msg time="2025-11-23T14:25:43.862101" level="INFO">Clicking element 'xpath=//button[@data-qa="login-button"]'.</msg>
 <arg>${SUBMIT_LOGIN}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:49:02.157667" elapsed="3.235932"/>
+<status status="PASS" start="2025-11-23T14:25:43.862101" elapsed="4.880064"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${LOGGED_USER}</arg>
-<arg>5s</arg>
+<arg>15s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-10-21T22:49:05.394598" elapsed="0.014473"/>
+<status status="PASS" start="2025-11-23T14:25:48.742165" elapsed="0.350260"/>
 </kw>
-<status status="PASS" start="2025-10-21T22:48:58.099398" elapsed="7.309673"/>
+<status status="PASS" start="2025-11-23T14:25:35.354404" elapsed="13.738021"/>
 </kw>
-<kw name="Logout" owner="keywords">
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:49:05.410073" level="INFO">Clicking element 'xpath=//a[text()=" Logout"]'.</msg>
-<arg>${LOGOUT_BTN}</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:49:05.410073" elapsed="3.060310"/>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:49.406473" level="INFO">Element 'xpath=//a[contains(text(),"Logged in as")]' contains text 'Logged in as'.</msg>
+<arg>${LOGGED_USER}</arg>
+<arg>Logged in as</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2025-11-23T14:25:49.092425" elapsed="0.314048"/>
 </kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>${LOGIN_BTN}</arg>
-<arg>2s</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-10-21T22:49:08.470383" elapsed="0.008999"/>
-</kw>
-<status status="PASS" start="2025-10-21T22:49:05.410073" elapsed="3.069309"/>
-</kw>
-<kw name="Page Should Contain" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:49:08.486382" level="INFO">Current page contains text 'Login to your account'.</msg>
-<arg>Login to your account</arg>
-<doc>Verifies that current page contains ``text``.</doc>
-<status status="PASS" start="2025-10-21T22:49:08.479382" elapsed="0.007999"/>
-</kw>
-<doc>Verify user can log out successfully</doc>
-<status status="PASS" start="2025-10-21T22:48:58.098398" elapsed="10.388983"/>
+<doc>Verify that a user can log in successfully</doc>
+<status status="PASS" start="2025-11-23T14:25:35.353403" elapsed="14.057581"/>
 </test>
 <kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-10-21T22:49:08.488383" elapsed="2.138749"/>
+<status status="PASS" start="2025-11-23T14:25:50.332777" elapsed="0.000000"/>
 </kw>
-<status status="PASS" start="2025-10-21T22:48:52.225237" elapsed="18.401895"/>
+<status status="PASS" start="2025-11-23T14:25:15.843515" elapsed="34.489262"/>
 </suite>
-<suite id="s1-s4" name="Test Search Product" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_search_product.robot">
+<suite id="s1-s6" name="Test Login OS X, Tahoe, Safari, 26.0" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_login.robot">
 <kw name="Open AutomationExercise" owner="keywords" type="SETUP">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:49:10.636097" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:25:34.891825" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:25:35.235625" level="INFO">Completed setup!</msg>
 <arg>${URL}</arg>
 <arg>chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-10-21T22:49:10.627132" elapsed="7.472427"/>
+<status status="PASS" start="2025-11-23T14:25:34.891825" elapsed="6.874478"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-10-21T22:49:18.099559" elapsed="0.025019"/>
+<status status="PASS" start="2025-11-23T14:25:41.766303" elapsed="0.162148"/>
 </kw>
-<status status="PASS" start="2025-10-21T22:49:10.627132" elapsed="7.497446"/>
+<kw name="Handle Cookie Consent" owner="keywords">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:42.928561" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:41.928500" elapsed="1.000061"/>
 </kw>
-<test id="s1-s4-t1" name="Search Product Test" line="8">
+<try>
+<branch type="TRY">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:42.930561" elapsed="0.422325"/>
+</kw>
+<msg time="2025-11-23T14:25:43.353883" level="INFO">${consent_present} = True</msg>
+<var>${consent_present}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:25:42.930561" elapsed="0.423322"/>
+</kw>
+<if>
+<branch type="IF" condition="${consent_present}">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:43.355882" level="INFO">Clicking element 'xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]'.</msg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:43.354883" elapsed="0.347042"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:25:43.702702" level="INFO">Cookie consent accepted</msg>
+<arg>Cookie consent accepted</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:25:43.702702" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:44.202738" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:43.702702" elapsed="0.500036"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:43.354883" elapsed="0.848853"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:43.354883" elapsed="0.849852"/>
+</if>
+<status status="PASS" start="2025-11-23T14:25:42.929561" elapsed="1.275174"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No cookie consent dialog present</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:44.205735" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:44.205735" elapsed="0.001000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:42.929561" elapsed="1.278175"/>
+</try>
+<try>
+<branch type="TRY">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:44.207736" level="INFO">Executing JavaScript:
+var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');if(overlay) overlay.remove();
+Without any arguments.</msg>
+<arg>var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');</arg>
+<arg>if(overlay) overlay.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-11-23T14:25:44.207736" elapsed="0.135152"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:44.207736" elapsed="0.135152"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No overlay to remove</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:44.342888" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:44.342888" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:44.207736" elapsed="0.135152"/>
+</try>
+<doc>Handles cookie consent dialog if present</doc>
+<status status="PASS" start="2025-11-23T14:25:41.928500" elapsed="2.414388"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:34.889826" elapsed="9.458436"/>
+</kw>
+<test id="s1-s6-t1" name="Login Test" line="8">
+<kw name="Login As Valid User" owner="keywords">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LOGIN_BTN}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:44.349773" elapsed="0.297982"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:44.647755" level="INFO">Clicking element 'xpath=//a[text()=" Signup / Login"]'.</msg>
+<arg>${LOGIN_BTN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:44.647755" elapsed="0.330841"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:47.979042" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:44.978596" elapsed="3.000446"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${EMAIL_INP}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:47.981066" elapsed="0.285060"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:48.266126" level="INFO">Typing text 'aikhan_test@example.com' into text field 'xpath=//input[@data-qa="login-email"]'.</msg>
+<arg>${EMAIL_INP}</arg>
+<arg>aikhan_test@example.com</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:48.266126" elapsed="0.586991"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:49.353308" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:48.853117" elapsed="0.500191"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${PASSWORD_INP}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:49.353308" elapsed="0.279380"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:49.632688" level="INFO">Typing text '12345678' into text field 'xpath=//input[@data-qa="login-password"]'.</msg>
+<arg>${PASSWORD_INP}</arg>
+<arg>12345678</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:49.632688" elapsed="0.519914"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:50.661356" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:50.161116" elapsed="0.500764"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${SUBMIT_LOGIN}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:50.662716" elapsed="0.283234"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:50.945950" level="INFO">Clicking element 'xpath=//button[@data-qa="login-button"]'.</msg>
+<arg>${SUBMIT_LOGIN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:50.945950" elapsed="0.271411"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LOGGED_USER}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:51.217361" elapsed="1.335718"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:44.349773" elapsed="8.203306"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:52.861835" level="INFO">Element 'xpath=//a[contains(text(),"Logged in as")]' contains text 'Logged in as'.</msg>
+<arg>${LOGGED_USER}</arg>
+<arg>Logged in as</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2025-11-23T14:25:52.553079" elapsed="0.308756"/>
+</kw>
+<doc>Verify that a user can log in successfully</doc>
+<status status="PASS" start="2025-11-23T14:25:44.348784" elapsed="8.513051"/>
+</test>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-11-23T14:25:53.792371" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:34.843039" elapsed="18.949332"/>
+</suite>
+<suite id="s1-s7" name="Test Logout Windows, 10, Chrome, latest" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_logout.robot">
+<kw name="Open AutomationExercise" owner="keywords" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:47.999252" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:25:48.373382" level="INFO">Completed setup!</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-11-23T14:25:47.992736" elapsed="6.804545"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-11-23T14:25:54.798283" elapsed="1.804534"/>
+</kw>
+<kw name="Handle Cookie Consent" owner="keywords">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:57.603139" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:56.602817" elapsed="1.000322"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:25:57.605138" elapsed="0.755583"/>
+</kw>
+<msg time="2025-11-23T14:25:58.361721" level="INFO">${consent_present} = True</msg>
+<var>${consent_present}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:25:57.605138" elapsed="0.757167"/>
+</kw>
+<if>
+<branch type="IF" condition="${consent_present}">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:58.363520" level="INFO">Clicking element 'xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]'.</msg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:25:58.363520" elapsed="0.617994"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:25:58.982905" level="INFO">Cookie consent accepted</msg>
+<arg>Cookie consent accepted</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:25:58.982032" elapsed="0.000873"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:25:59.483016" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:25:58.982905" elapsed="0.500111"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:58.363301" elapsed="1.119715"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:58.363301" elapsed="1.119715"/>
+</if>
+<status status="PASS" start="2025-11-23T14:25:57.604139" elapsed="1.878877"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No cookie consent dialog present</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:25:59.483016" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:25:59.483016" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:57.604139" elapsed="1.878877"/>
+</try>
+<try>
+<branch type="TRY">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:25:59.483016" level="INFO">Executing JavaScript:
+var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');if(overlay) overlay.remove();
+Without any arguments.</msg>
+<arg>var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');</arg>
+<arg>if(overlay) overlay.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-11-23T14:25:59.483016" elapsed="1.567017"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:59.483016" elapsed="1.567985"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No overlay to remove</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:26:01.052849" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:26:01.052525" elapsed="0.000999"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:25:59.483016" elapsed="1.571508"/>
+</try>
+<doc>Handles cookie consent dialog if present</doc>
+<status status="PASS" start="2025-11-23T14:25:56.602817" elapsed="4.451707"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:47.992736" elapsed="13.061788"/>
+</kw>
+<test id="s1-s7-t1" name="Logout Test" line="8">
+<kw name="Login As Valid User" owner="keywords">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LOGIN_BTN}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:01.056524" elapsed="0.316478"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:01.373002" level="INFO">Clicking element 'xpath=//a[text()=" Signup / Login"]'.</msg>
+<arg>${LOGIN_BTN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:01.373002" elapsed="3.832021"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:08.207195" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:05.207042" elapsed="3.000153"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${EMAIL_INP}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:08.207195" elapsed="0.345717"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:08.553912" level="INFO">Typing text 'aikhan_test@example.com' into text field 'xpath=//input[@data-qa="login-email"]'.</msg>
+<arg>${EMAIL_INP}</arg>
+<arg>aikhan_test@example.com</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:08.553912" elapsed="1.009320"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:10.063474" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:09.563232" elapsed="0.500242"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${PASSWORD_INP}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:10.063474" elapsed="0.378755"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:10.443257" level="INFO">Typing text '12345678' into text field 'xpath=//input[@data-qa="login-password"]'.</msg>
+<arg>${PASSWORD_INP}</arg>
+<arg>12345678</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:10.443257" elapsed="0.539511"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:11.483321" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:10.982768" elapsed="0.500553"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${SUBMIT_LOGIN}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:11.484460" elapsed="0.304574"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:11.790033" level="INFO">Clicking element 'xpath=//button[@data-qa="login-button"]'.</msg>
+<arg>${SUBMIT_LOGIN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:11.790033" elapsed="4.481790"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LOGGED_USER}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:16.271823" elapsed="0.300576"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:01.056524" elapsed="15.516595"/>
+</kw>
+<kw name="Logout" owner="keywords">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:16.573119" level="INFO">Clicking element 'xpath=//a[text()=" Logout"]'.</msg>
+<arg>${LOGOUT_BTN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:16.573119" elapsed="2.607873"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LOGIN_BTN}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:19.182004" elapsed="0.332054"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:16.573119" elapsed="2.940939"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:19.834099" level="INFO">Current page contains text 'Login to your account'.</msg>
+<arg>Login to your account</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-11-23T14:26:19.514058" elapsed="0.327101"/>
+</kw>
+<doc>Verify user can log out successfully</doc>
+<status status="PASS" start="2025-11-23T14:26:01.055524" elapsed="18.785635"/>
+</test>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-11-23T14:26:20.676347" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:25:47.952682" elapsed="32.729488"/>
+</suite>
+<suite id="s1-s8" name="Test Logout Windows, 10, Firefox, latest" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_logout.robot">
+<kw name="Open AutomationExercise" owner="keywords" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:02.499416" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:26:02.816171" level="INFO">Completed setup!</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-11-23T14:26:02.499416" elapsed="18.193628"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-11-23T14:26:20.694826" elapsed="2.305331"/>
+</kw>
+<kw name="Handle Cookie Consent" owner="keywords">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:24.002625" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:23.002170" elapsed="1.000982"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:24.005135" elapsed="0.413638"/>
+</kw>
+<msg time="2025-11-23T14:26:24.419773" level="INFO">${consent_present} = True</msg>
+<var>${consent_present}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:26:24.004135" elapsed="0.415638"/>
+</kw>
+<if>
+<branch type="IF" condition="${consent_present}">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:24.421773" level="INFO">Clicking element 'xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]'.</msg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:24.420773" elapsed="0.544875"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:26:24.967660" level="INFO">Cookie consent accepted</msg>
+<arg>Cookie consent accepted</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:26:24.965648" elapsed="0.002036"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:25.468117" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:24.967684" elapsed="0.500433"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:24.420773" elapsed="1.047344"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:26:24.420773" elapsed="1.047344"/>
+</if>
+<status status="PASS" start="2025-11-23T14:26:24.004135" elapsed="1.463982"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No cookie consent dialog present</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:26:25.471138" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:26:25.471138" elapsed="0.001020"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:26:24.004135" elapsed="1.468023"/>
+</try>
+<try>
+<branch type="TRY">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:25.472158" level="INFO">Executing JavaScript:
+var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');if(overlay) overlay.remove();
+Without any arguments.</msg>
+<arg>var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');</arg>
+<arg>if(overlay) overlay.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-11-23T14:26:25.472158" elapsed="0.296472"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:25.472158" elapsed="0.296472"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No overlay to remove</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:26:25.770629" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:26:25.769629" elapsed="0.002000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:26:25.472158" elapsed="0.299471"/>
+</try>
+<doc>Handles cookie consent dialog if present</doc>
+<status status="PASS" start="2025-11-23T14:26:23.001157" elapsed="2.770472"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:02.497473" elapsed="23.275168"/>
+</kw>
+<test id="s1-s8-t1" name="Logout Test" line="8">
+<kw name="Login As Valid User" owner="keywords">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LOGIN_BTN}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:25.773673" elapsed="0.520833"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:26.296028" level="INFO">Clicking element 'xpath=//a[text()=" Signup / Login"]'.</msg>
+<arg>${LOGIN_BTN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:26.296028" elapsed="2.546166"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:31.844976" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:28.844675" elapsed="3.000301"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${EMAIL_INP}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:31.844976" elapsed="0.314732"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:32.160709" level="INFO">Typing text 'aikhan_test@example.com' into text field 'xpath=//input[@data-qa="login-email"]'.</msg>
+<arg>${EMAIL_INP}</arg>
+<arg>aikhan_test@example.com</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:32.160709" elapsed="0.532815"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:33.195465" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:32.693965" elapsed="0.501500"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${PASSWORD_INP}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:33.196486" elapsed="0.336132"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:33.532618" level="INFO">Typing text '12345678' into text field 'xpath=//input[@data-qa="login-password"]'.</msg>
+<arg>${PASSWORD_INP}</arg>
+<arg>12345678</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:33.532618" elapsed="0.470185"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:34.510762" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:34.002803" elapsed="0.508484"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${SUBMIT_LOGIN}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:34.512309" elapsed="0.301898"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:34.816207" level="INFO">Clicking element 'xpath=//button[@data-qa="login-button"]'.</msg>
+<arg>${SUBMIT_LOGIN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:34.815207" elapsed="4.720061"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LOGGED_USER}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:39.536276" elapsed="0.464954"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:25.773673" elapsed="14.228556"/>
+</kw>
+<kw name="Logout" owner="keywords">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:40.002797" level="INFO">Clicking element 'xpath=//a[text()=" Logout"]'.</msg>
+<arg>${LOGOUT_BTN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:40.002797" elapsed="2.130784"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LOGIN_BTN}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:42.134581" elapsed="0.393106"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:40.002229" elapsed="2.528980"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:42.856329" level="INFO">Current page contains text 'Login to your account'.</msg>
+<arg>Login to your account</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-11-23T14:26:42.531209" elapsed="0.326125"/>
+</kw>
+<doc>Verify user can log out successfully</doc>
+<status status="PASS" start="2025-11-23T14:26:25.772641" elapsed="17.085689"/>
+</test>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-11-23T14:26:43.744837" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:02.453268" elapsed="41.298083"/>
+</suite>
+<suite id="s1-s9" name="Test Logout OS X, Tahoe, Safari, 26.0" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_logout.robot">
+<kw name="Open AutomationExercise" owner="keywords" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:06.110982" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:26:06.480483" level="INFO">Completed setup!</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-11-23T14:26:06.110982" elapsed="7.821909"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-11-23T14:26:13.932891" elapsed="0.162387"/>
+</kw>
+<kw name="Handle Cookie Consent" owner="keywords">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:15.097579" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:14.097299" elapsed="1.000280"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:15.099578" elapsed="0.483216"/>
+</kw>
+<msg time="2025-11-23T14:26:15.582794" level="INFO">${consent_present} = True</msg>
+<var>${consent_present}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:26:15.099578" elapsed="0.483216"/>
+</kw>
+<if>
+<branch type="IF" condition="${consent_present}">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:15.582794" level="INFO">Clicking element 'xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]'.</msg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:15.582794" elapsed="0.363144"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:26:15.945938" level="INFO">Cookie consent accepted</msg>
+<arg>Cookie consent accepted</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:26:15.945938" elapsed="0.005011"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:16.452460" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:15.951962" elapsed="0.500498"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:15.582794" elapsed="0.870667"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:26:15.582794" elapsed="0.871668"/>
+</if>
+<status status="PASS" start="2025-11-23T14:26:15.098580" elapsed="1.355882"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No cookie consent dialog present</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:26:16.455461" elapsed="0.000999"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:26:16.455461" elapsed="0.000999"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:26:15.098580" elapsed="1.358881"/>
+</try>
+<try>
+<branch type="TRY">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:16.458460" level="INFO">Executing JavaScript:
+var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');if(overlay) overlay.remove();
+Without any arguments.</msg>
+<arg>var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');</arg>
+<arg>if(overlay) overlay.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-11-23T14:26:16.458460" elapsed="0.214496"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:16.457461" elapsed="0.215495"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No overlay to remove</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:26:16.672956" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:26:16.672956" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:26:16.457461" elapsed="0.215495"/>
+</try>
+<doc>Handles cookie consent dialog if present</doc>
+<status status="PASS" start="2025-11-23T14:26:14.095278" elapsed="2.577678"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:06.108968" elapsed="10.563988"/>
+</kw>
+<test id="s1-s9-t1" name="Logout Test" line="8">
+<kw name="Login As Valid User" owner="keywords">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LOGIN_BTN}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:16.681945" elapsed="0.390113"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:17.072058" level="INFO">Clicking element 'xpath=//a[text()=" Signup / Login"]'.</msg>
+<arg>${LOGIN_BTN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:17.072058" elapsed="0.380801"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:20.453333" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:17.452859" elapsed="3.000474"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${EMAIL_INP}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:20.453333" elapsed="0.309360"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:20.762693" level="INFO">Typing text 'aikhan_test@example.com' into text field 'xpath=//input[@data-qa="login-email"]'.</msg>
+<arg>${EMAIL_INP}</arg>
+<arg>aikhan_test@example.com</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:20.762693" elapsed="0.542544"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:21.807735" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:21.306237" elapsed="0.501498"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${PASSWORD_INP}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:21.808735" elapsed="0.304350"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:22.113085" level="INFO">Typing text '12345678' into text field 'xpath=//input[@data-qa="login-password"]'.</msg>
+<arg>${PASSWORD_INP}</arg>
+<arg>12345678</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:22.113085" elapsed="0.458918"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:23.072776" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:22.572003" elapsed="0.501497"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${SUBMIT_LOGIN}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:23.074506" elapsed="0.328226"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:23.402732" level="INFO">Clicking element 'xpath=//button[@data-qa="login-button"]'.</msg>
+<arg>${SUBMIT_LOGIN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:23.402732" elapsed="0.338516"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LOGGED_USER}</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:23.742261" elapsed="1.610952"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:16.681945" elapsed="8.671268"/>
+</kw>
+<kw name="Logout" owner="keywords">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:25.353213" level="INFO">Clicking element 'xpath=//a[text()=" Logout"]'.</msg>
+<arg>${LOGOUT_BTN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:25.353213" elapsed="1.169925"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LOGIN_BTN}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:26.523138" elapsed="0.324103"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:25.353213" elapsed="1.498048"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:27.192260" level="INFO">Current page contains text 'Login to your account'.</msg>
+<arg>Login to your account</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-11-23T14:26:26.851787" elapsed="0.341264"/>
+</kw>
+<doc>Verify user can log out successfully</doc>
+<status status="PASS" start="2025-11-23T14:26:16.672956" elapsed="10.520095"/>
+</test>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-11-23T14:26:28.092578" elapsed="0.001552"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:06.058564" elapsed="22.035933"/>
+</suite>
+<suite id="s1-s10" name="Test Search Product Windows, 10, Chrome, latest" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_search_product.robot">
+<kw name="Open AutomationExercise" owner="keywords" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:33.176495" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:26:33.521376" level="INFO">Completed setup!</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-11-23T14:26:33.174450" elapsed="8.188475"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-11-23T14:26:41.362925" elapsed="0.344939"/>
+</kw>
+<kw name="Handle Cookie Consent" owner="keywords">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:42.708347" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:41.707864" elapsed="1.000483"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:42.708347" elapsed="1.374483"/>
+</kw>
+<msg time="2025-11-23T14:26:44.082830" level="INFO">${consent_present} = True</msg>
+<var>${consent_present}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:26:42.708347" elapsed="1.382997"/>
+</kw>
+<if>
+<branch type="IF" condition="${consent_present}">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:44.091857" level="INFO">Clicking element 'xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]'.</msg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:44.091857" elapsed="0.743067"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:26:44.840949" level="INFO">Cookie consent accepted</msg>
+<arg>Cookie consent accepted</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:26:44.834924" elapsed="0.006025"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:45.342924" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:44.841961" elapsed="0.501074"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:44.091857" elapsed="1.252178"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:26:44.091857" elapsed="1.253178"/>
+</if>
+<status status="PASS" start="2025-11-23T14:26:42.708347" elapsed="2.636688"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No cookie consent dialog present</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:26:45.346035" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:26:45.345035" elapsed="0.002000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:26:42.708347" elapsed="2.638688"/>
+</try>
+<try>
+<branch type="TRY">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:45.348035" level="INFO">Executing JavaScript:
+var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');if(overlay) overlay.remove();
+Without any arguments.</msg>
+<arg>var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');</arg>
+<arg>if(overlay) overlay.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-11-23T14:26:45.348035" elapsed="0.171439"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:45.347035" elapsed="0.173439"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No overlay to remove</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:26:45.521474" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:26:45.521474" elapsed="0.000813"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:26:45.347035" elapsed="0.176326"/>
+</try>
+<doc>Handles cookie consent dialog if present</doc>
+<status status="PASS" start="2025-11-23T14:26:41.707864" elapsed="3.815497"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:33.172936" elapsed="12.350425"/>
+</kw>
+<test id="s1-s10-t1" name="Search Product Test" line="8">
 <kw name="Go To Products Page" owner="keywords">
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:49:18.125578" level="INFO">Clicking element 'xpath=//a[text()=" Products"]'.</msg>
+<msg time="2025-11-23T14:26:45.526352" level="INFO">Clicking element 'xpath=//a[text()=" Products"]'.</msg>
 <arg>${PRODUCTS_LINK}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:49:18.124578" elapsed="2.904287"/>
+<status status="PASS" start="2025-11-23T14:26:45.526352" elapsed="5.095678"/>
 </kw>
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
 <arg>${SEARCH_INPUT}</arg>
 <arg>2s</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="PASS" start="2025-10-21T22:49:21.028865" elapsed="0.007999"/>
+<status status="PASS" start="2025-11-23T14:26:50.622030" elapsed="0.771323"/>
 </kw>
-<status status="PASS" start="2025-10-21T22:49:18.124578" elapsed="2.912286"/>
+<status status="PASS" start="2025-11-23T14:26:45.525909" elapsed="5.867444"/>
 </kw>
 <kw name="Search For Product" owner="keywords">
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:49:21.037865" level="INFO">Typing text 'dress' into text field '//input[@id='search_product']'.</msg>
+<msg time="2025-11-23T14:26:51.393353" level="INFO">Typing text 'dress' into text field '//input[@id='search_product']'.</msg>
 <arg>${SEARCH_INPUT}</arg>
 <arg>${product_name}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:49:21.037865" elapsed="0.053840"/>
+<status status="PASS" start="2025-11-23T14:26:51.393353" elapsed="0.699524"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:49:21.091705" level="INFO">Clicking element '//button[@id='submit_search']'.</msg>
+<msg time="2025-11-23T14:26:52.092877" level="INFO">Clicking element '//button[@id='submit_search']'.</msg>
 <arg>${SEARCH_BUTTON}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:49:21.091705" elapsed="3.458763"/>
+<status status="PASS" start="2025-11-23T14:26:52.092877" elapsed="2.841389"/>
 </kw>
 <kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
 <arg>${SEARCH_RESULT_SECTION}</arg>
 <arg>2s</arg>
 <doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="PASS" start="2025-10-21T22:49:24.551468" elapsed="0.004504"/>
+<status status="PASS" start="2025-11-23T14:26:54.934266" elapsed="0.198733"/>
 </kw>
 <arg>dress</arg>
-<status status="PASS" start="2025-10-21T22:49:21.037865" elapsed="3.518107"/>
+<status status="PASS" start="2025-11-23T14:26:51.393353" elapsed="3.739646"/>
 </kw>
 <kw name="Verify Search Results Contain" owner="keywords">
 <kw name="Get Text" owner="SeleniumLibrary">
-<msg time="2025-10-21T22:49:24.589402" level="INFO">${results} = SEARCHED PRODUCTS
+<msg time="2025-11-23T14:26:55.543088" level="INFO">${results} = SEARCHED PRODUCTS
 Rs. 1000
 Sleeveless Dress
 Add to cart
@@ -480,40 +2637,414 @@ Sleev...</msg>
 <var>${results}</var>
 <arg>${SEARCH_RESULT_SECTION}</arg>
 <doc>Returns the text value of the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-10-21T22:49:24.555972" elapsed="0.033430"/>
+<status status="PASS" start="2025-11-23T14:26:55.132999" elapsed="0.411101"/>
 </kw>
 <kw name="Should Contain" owner="BuiltIn">
 <arg>${results.lower()}</arg>
 <arg>${expected_text.lower()}</arg>
 <doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" start="2025-10-21T22:49:24.589402" elapsed="0.000000"/>
+<status status="PASS" start="2025-11-23T14:26:55.545098" elapsed="0.001000"/>
 </kw>
 <arg>dress</arg>
-<status status="PASS" start="2025-10-21T22:49:24.555972" elapsed="0.034430"/>
+<status status="PASS" start="2025-11-23T14:26:55.132999" elapsed="0.413099"/>
 </kw>
 <doc>Verify that the product search returns relevant results.</doc>
-<status status="PASS" start="2025-10-21T22:49:18.124578" elapsed="6.465824"/>
+<status status="PASS" start="2025-11-23T14:26:45.524293" elapsed="10.022804"/>
 </test>
 <kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-10-21T22:49:24.591402" elapsed="2.152700"/>
+<status status="PASS" start="2025-11-23T14:26:56.425347" elapsed="0.003036"/>
 </kw>
-<status status="PASS" start="2025-10-21T22:49:10.627132" elapsed="16.116970"/>
+<status status="PASS" start="2025-11-23T14:26:33.134297" elapsed="23.294086"/>
 </suite>
-<status status="PASS" start="2025-10-21T22:48:24.602894" elapsed="62.142784"/>
+<suite id="s1-s11" name="Test Search Product Windows, 10, Firefox, latest" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_search_product.robot">
+<kw name="Open AutomationExercise" owner="keywords" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:40.790105" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:26:41.136307" level="INFO">Completed setup!</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-11-23T14:26:40.789102" elapsed="16.677654"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-11-23T14:26:57.466756" elapsed="0.456294"/>
+</kw>
+<kw name="Handle Cookie Consent" owner="keywords">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:26:58.925004" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:57.924786" elapsed="1.000385"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:26:58.927172" elapsed="0.415942"/>
+</kw>
+<msg time="2025-11-23T14:26:59.344114" level="INFO">${consent_present} = True</msg>
+<var>${consent_present}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:26:58.926172" elapsed="0.417942"/>
+</kw>
+<if>
+<branch type="IF" condition="${consent_present}">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:59.346095" level="INFO">Clicking element 'xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]'.</msg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:26:59.345114" elapsed="0.477793"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:26:59.824527" level="INFO">Cookie consent accepted</msg>
+<arg>Cookie consent accepted</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:26:59.823909" elapsed="0.000618"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:27:00.326098" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:26:59.825547" elapsed="0.500551"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:59.345114" elapsed="0.980984"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:26:59.345114" elapsed="0.980984"/>
+</if>
+<status status="PASS" start="2025-11-23T14:26:58.926172" elapsed="1.399926"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No cookie consent dialog present</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:27:00.330631" elapsed="0.000525"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:27:00.330631" elapsed="0.000525"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:26:58.926172" elapsed="1.406526"/>
+</try>
+<try>
+<branch type="TRY">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:27:00.332698" level="INFO">Executing JavaScript:
+var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');if(overlay) overlay.remove();
+Without any arguments.</msg>
+<arg>var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');</arg>
+<arg>if(overlay) overlay.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-11-23T14:27:00.332698" elapsed="0.153401"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:27:00.332698" elapsed="0.153401"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No overlay to remove</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:27:00.486099" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:27:00.486099" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:27:00.332698" elapsed="0.153401"/>
+</try>
+<doc>Handles cookie consent dialog if present</doc>
+<status status="PASS" start="2025-11-23T14:26:57.924786" elapsed="2.561313"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:40.788102" elapsed="19.697997"/>
+</kw>
+<test id="s1-s11-t1" name="Search Product Test" line="8">
+<kw name="Go To Products Page" owner="keywords">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:27:00.492141" level="INFO">Clicking element 'xpath=//a[text()=" Products"]'.</msg>
+<arg>${PRODUCTS_LINK}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:27:00.492141" elapsed="4.144524"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${SEARCH_INPUT}</arg>
+<arg>2s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-11-23T14:27:04.636665" elapsed="0.165286"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:27:00.492141" elapsed="4.309810"/>
+</kw>
+<kw name="Search For Product" owner="keywords">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:27:04.801951" level="INFO">Typing text 'dress' into text field '//input[@id='search_product']'.</msg>
+<arg>${SEARCH_INPUT}</arg>
+<arg>${product_name}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:27:04.801951" elapsed="0.562175"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:27:05.366154" level="INFO">Clicking element '//button[@id='submit_search']'.</msg>
+<arg>${SEARCH_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:27:05.366154" elapsed="3.626073"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${SEARCH_RESULT_SECTION}</arg>
+<arg>2s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-11-23T14:27:08.992984" elapsed="0.139768"/>
+</kw>
+<arg>dress</arg>
+<status status="PASS" start="2025-11-23T14:27:04.801951" elapsed="4.330801"/>
+</kw>
+<kw name="Verify Search Results Contain" owner="keywords">
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:27:09.687410" level="INFO">${results} = SEARCHED PRODUCTS
+Rs. 1000
+Sleeveless Dress
+Add to cart
+View Product
+Rs. 1500
+Stylish Dress
+Add to cart
+View Product
+Rs. 478
+Sleeves Top and Short - Blue &amp; Pink
+Add to cart
+View Product
+Rs. 1050
+Sleev...</msg>
+<var>${results}</var>
+<arg>${SEARCH_RESULT_SECTION}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:27:09.132752" elapsed="0.554658"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${results.lower()}</arg>
+<arg>${expected_text.lower()}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-11-23T14:27:09.688410" elapsed="0.001001"/>
+</kw>
+<arg>dress</arg>
+<status status="PASS" start="2025-11-23T14:27:09.132752" elapsed="0.557660"/>
+</kw>
+<doc>Verify that the product search returns relevant results.</doc>
+<status status="PASS" start="2025-11-23T14:27:00.486099" elapsed="9.204313"/>
+</test>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-11-23T14:27:11.312991" elapsed="0.001002"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:40.748743" elapsed="30.565250"/>
+</suite>
+<suite id="s1-s12" name="Test Search Product OS X, Tahoe, Safari, 26.0" source="C:\Users\spy04\Desktop\uni\1\testing\test_automation\tests\test_search_product.robot">
+<kw name="Open AutomationExercise" owner="keywords" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:26:56.522786" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<msg time="2025-11-23T14:26:56.892234" level="INFO">Completed setup!</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-11-23T14:26:56.522786" elapsed="7.426111"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-11-23T14:27:03.949898" elapsed="0.163909"/>
+</kw>
+<kw name="Handle Cookie Consent" owner="keywords">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:27:05.116284" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:27:04.115828" elapsed="1.000456"/>
+</kw>
+<try>
+<branch type="TRY">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-23T14:27:05.116284" elapsed="0.430513"/>
+</kw>
+<msg time="2025-11-23T14:27:05.547798" level="INFO">${consent_present} = True</msg>
+<var>${consent_present}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<arg>3s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-23T14:27:05.116284" elapsed="0.432514"/>
+</kw>
+<if>
+<branch type="IF" condition="${consent_present}">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:27:05.549800" level="INFO">Clicking element 'xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]'.</msg>
+<arg>xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:27:05.549800" elapsed="0.351370"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-11-23T14:27:05.903197" level="INFO">Cookie consent accepted</msg>
+<arg>Cookie consent accepted</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-11-23T14:27:05.902182" elapsed="0.001015"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-23T14:27:06.403972" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-23T14:27:05.903197" elapsed="0.501288"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:27:05.549800" elapsed="0.854685"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:27:05.549800" elapsed="0.854685"/>
+</if>
+<status status="PASS" start="2025-11-23T14:27:05.116284" elapsed="1.288201"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No cookie consent dialog present</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:27:06.404485" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:27:06.404485" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:27:05.116284" elapsed="1.288201"/>
+</try>
+<try>
+<branch type="TRY">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:27:06.409998" level="INFO">Executing JavaScript:
+var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');if(overlay) overlay.remove();
+Without any arguments.</msg>
+<arg>var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root');</arg>
+<arg>if(overlay) overlay.remove();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-11-23T14:27:06.404485" elapsed="0.149175"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:27:06.404485" elapsed="0.150174"/>
+</branch>
+<branch type="EXCEPT">
+<kw name="Log" owner="BuiltIn">
+<arg>No overlay to remove</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-11-23T14:27:06.555659" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-11-23T14:27:06.555659" elapsed="0.001617"/>
+</branch>
+<status status="PASS" start="2025-11-23T14:27:06.404485" elapsed="0.152791"/>
+</try>
+<doc>Handles cookie consent dialog if present</doc>
+<status status="PASS" start="2025-11-23T14:27:04.115828" elapsed="2.441448"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:56.522051" elapsed="10.036226"/>
+</kw>
+<test id="s1-s12-t1" name="Search Product Test" line="8">
+<kw name="Go To Products Page" owner="keywords">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:27:06.560277" level="INFO">Clicking element 'xpath=//a[text()=" Products"]'.</msg>
+<arg>${PRODUCTS_LINK}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:27:06.560277" elapsed="0.292440"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${SEARCH_INPUT}</arg>
+<arg>2s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-11-23T14:27:06.861258" elapsed="0.501669"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:27:06.559281" elapsed="0.803646"/>
+</kw>
+<kw name="Search For Product" owner="keywords">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:27:07.362927" level="INFO">Typing text 'dress' into text field '//input[@id='search_product']'.</msg>
+<arg>${SEARCH_INPUT}</arg>
+<arg>${product_name}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:27:07.362927" elapsed="0.460010"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:27:07.823777" level="INFO">Clicking element '//button[@id='submit_search']'.</msg>
+<arg>${SEARCH_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:27:07.823777" elapsed="0.548493"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${SEARCH_RESULT_SECTION}</arg>
+<arg>2s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-11-23T14:27:08.372270" elapsed="0.140661"/>
+</kw>
+<arg>dress</arg>
+<status status="PASS" start="2025-11-23T14:27:07.362927" elapsed="1.150004"/>
+</kw>
+<kw name="Verify Search Results Contain" owner="keywords">
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2025-11-23T14:27:08.807040" level="INFO">${results} = 
+
+						
+						Searched Products
+						
+
+						
+						
+							
+								
+									
+										
+											
+										
+										Added!
+									
+									
+										Your product has been added to cart....</msg>
+<var>${results}</var>
+<arg>${SEARCH_RESULT_SECTION}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-23T14:27:08.512931" elapsed="0.295111"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${results.lower()}</arg>
+<arg>${expected_text.lower()}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-11-23T14:27:08.808042" elapsed="0.000997"/>
+</kw>
+<arg>dress</arg>
+<status status="PASS" start="2025-11-23T14:27:08.512931" elapsed="0.297108"/>
+</kw>
+<doc>Verify that the product search returns relevant results.</doc>
+<status status="PASS" start="2025-11-23T14:27:06.558277" elapsed="2.251762"/>
+</test>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-11-23T14:27:09.707831" elapsed="0.000999"/>
+</kw>
+<status status="PASS" start="2025-11-23T14:26:56.482377" elapsed="13.227455"/>
+</suite>
+<doc>[https://pabot.org/?ref=log|Pabot] result from 12 executions.</doc>
+<status status="PASS" start="2025-11-23T14:24:26.773000" elapsed="164.540000"/>
 </suite>
 <statistics>
 <total>
-<stat pass="4" fail="0" skip="0">All Tests</stat>
+<stat pass="12" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="4" fail="0" skip="0" id="s1" name="Tests">Tests</stat>
-<stat pass="1" fail="0" skip="0" id="s1-s1" name="Test Contact Us">Tests.Test Contact Us</stat>
-<stat pass="1" fail="0" skip="0" id="s1-s2" name="Test Login">Tests.Test Login</stat>
-<stat pass="1" fail="0" skip="0" id="s1-s3" name="Test Logout">Tests.Test Logout</stat>
-<stat pass="1" fail="0" skip="0" id="s1-s4" name="Test Search Product">Tests.Test Search Product</stat>
+<stat pass="12" fail="0" skip="0" id="s1" name="Suites">Suites</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="Test Contact Us Windows, 10, Chrome, latest">Suites.Test Contact Us Windows, 10, Chrome, latest</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s2" name="Test Contact Us Windows, 10, Firefox, latest">Suites.Test Contact Us Windows, 10, Firefox, latest</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s3" name="Test Contact Us OS X, Tahoe, Safari, 26.0">Suites.Test Contact Us OS X, Tahoe, Safari, 26.0</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s4" name="Test Login Windows, 10, Chrome, latest">Suites.Test Login Windows, 10, Chrome, latest</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s5" name="Test Login Windows, 10, Firefox, latest">Suites.Test Login Windows, 10, Firefox, latest</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s6" name="Test Login OS X, Tahoe, Safari, 26.0">Suites.Test Login OS X, Tahoe, Safari, 26.0</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s7" name="Test Logout Windows, 10, Chrome, latest">Suites.Test Logout Windows, 10, Chrome, latest</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s8" name="Test Logout Windows, 10, Firefox, latest">Suites.Test Logout Windows, 10, Firefox, latest</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s9" name="Test Logout OS X, Tahoe, Safari, 26.0">Suites.Test Logout OS X, Tahoe, Safari, 26.0</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s10" name="Test Search Product Windows, 10, Chrome, latest">Suites.Test Search Product Windows, 10, Chrome, latest</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s11" name="Test Search Product Windows, 10, Firefox, latest">Suites.Test Search Product Windows, 10, Firefox, latest</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s12" name="Test Search Product OS X, Tahoe, Safari, 26.0">Suites.Test Search Product OS X, Tahoe, Safari, 26.0</stat>
 </suite>
 </statistics>
 <errors>

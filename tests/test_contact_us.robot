@@ -8,6 +8,7 @@ Contact Us Test
     [Documentation]    Verify that the contact form submission works correctly.
     Open Browser    https://automationexercise.com/    chrome
     Maximize Browser Window
+    Handle Cookie Consent
     Click Element    xpath=//a[text()=' Contact us']
     Wait Until Element Is Visible    xpath=//input[@data-qa='name']    1s
     Input Text    xpath=//input[@data-qa='name']       Aikhan

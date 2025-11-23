@@ -6,17 +6,49 @@ Resource   locators.robot
 Open AutomationExercise
     Open Browser    ${URL}    chrome
     Maximize Browser Window
+    Handle Cookie Consent
+
+Handle Cookie Consent
+    [Documentation]    Handles cookie consent dialog if present
+    Sleep    1s    # Give the dialog time to appear
+    TRY
+        # Try to find and click the consent button
+        ${consent_present}=    Run Keyword And Return Status    
+        ...    Wait Until Element Is Visible    xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]    3s
+        IF    ${consent_present}
+            Click Element    xpath=//button[contains(@class, 'fc-button') or contains(text(), 'Consent') or contains(text(), 'Accept')]
+            Log    Cookie consent accepted
+            Sleep    0.5s
+        END
+    EXCEPT
+        Log    No cookie consent dialog present
+    END
+    # Alternative: Remove the overlay with JavaScript if button click doesn't work
+    TRY
+        Execute JavaScript    
+        ...    var overlay = document.querySelector('.fc-dialog-overlay, .fc-consent-root'); 
+        ...    if(overlay) overlay.remove();
+    EXCEPT
+        Log    No overlay to remove
+    END
 
 Login As Valid User
+    Wait Until Element Is Visible    ${LOGIN_BTN}    15s
     Click Element    ${LOGIN_BTN}
+    Sleep    3s    # Critical for Safari - wait for page transition
+    Wait Until Element Is Visible    ${EMAIL_INP}    15s
     Input Text       ${EMAIL_INP}       aikhan_test@example.com
+    Sleep    0.5s
+    Wait Until Element Is Visible    ${PASSWORD_INP}    10s
     Input Text       ${PASSWORD_INP}    12345678
+    Sleep    0.5s
+    Wait Until Element Is Visible    ${SUBMIT_LOGIN}    10s
     Click Element    ${SUBMIT_LOGIN}
-    Wait Until Element Is Visible    ${LOGGED_USER}    5s
+    Wait Until Element Is Visible    ${LOGGED_USER}    15s
 
 Logout
     Click Element    ${LOGOUT_BTN}
-    Wait Until Element Is Visible    ${LOGIN_BTN}    2s
+    Wait Until Element Is Visible    ${LOGIN_BTN}    10s
 
 Go To Products Page
     Click Element    ${PRODUCTS_LINK}
