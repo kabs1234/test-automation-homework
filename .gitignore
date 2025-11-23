@@ -10,3 +10,4 @@ pabot_results/
 browserstack.err
 env
 /log
+password.txt
